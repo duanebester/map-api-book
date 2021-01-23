@@ -3,9 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Map API Book</title>
-        
-        <meta name="robots" content="noindex" />
+        <title>Introduction - Map API Book</title>
         
         
 
@@ -189,191 +187,6 @@
 </ul>
 </li>
 </ul>
-<h1><a class="header" href="#setup-api-server" id="setup-api-server">Setup API Server</a></h1>
-<p>For our Map project, we need a robust and easy to use API Server. Luckily <a href="https://koajs.com/">Koa</a> fits these requirements and is a nice API framework to use.</p>
-<h1><a class="header" href="#prerequisites" id="prerequisites">Prerequisites</a></h1>
-<h4><a class="header" href="#tools" id="tools">Tools</a></h4>
-<ul>
-<li>Install <a href="https://nodejs.org/en/download/">Node LTS</a></li>
-<li>Install <a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a>
-<ul>
-<li>Make sure Docker is running after install!</li>
-</ul>
-</li>
-<li>Install <a href="https://code.visualstudio.com/">VSCode</a></li>
-<li>Install <a href="https://git-scm.com/">Git</a>
-<ul>
-<li>Apple ships Git with XCode, so on a mac you <em>shouldn't</em> need to install it.</li>
-</ul>
-</li>
-</ul>
-<h4><a class="header" href="#accounts" id="accounts">Accounts</a></h4>
-<ul>
-<li>Create a <a href="https://github.com/">GitHub</a> Account</li>
-<li>Create a <a href="https://digitalocean.com/">DigitalOcean</a> Account</li>
-</ul>
-<h3><a class="header" href="#verifying-installs" id="verifying-installs">Verifying Installs</a></h3>
-<p>Open a terminal, type and enter:</p>
-<pre><code class="language-bash">&gt; docker ps
-# Returns: CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
-</code></pre>
-<p>Same terminal, type and enter:</p>
-<pre><code class="language-bash">&gt; node --version
-# Returns: v14.15.4 or similar
-</code></pre>
-<p>Same terminal, type and enter:</p>
-<pre><code class="language-bash">&gt; git --version
-# Returns: git version 2.24.3 (Apple Git-128)
-</code></pre>
-<h1><a class="header" href="#create-project" id="create-project">Create Project</a></h1>
-<p>Create a new directory, <code>map-api</code> and then change directory into it:</p>
-<pre><code class="language-bash">&gt; mkdir map-api
-&gt; cd map-api
-</code></pre>
-<p>Create an NPM project:</p>
-<pre><code class="language-bash">&gt; npm init -y
-</code></pre>
-<h4><a class="header" href="#install-dependencies" id="install-dependencies">Install dependencies</a></h4>
-<pre><code class="language-bash">&gt; npm i koa nodemon
-</code></pre>
-<h4><a class="header" href="#app-files" id="app-files">App files</a></h4>
-<blockquote>
-<p>Note: In the root directory of the project</p>
-</blockquote>
-<p>Make a new file called <code>index.js</code>.</p>
-<pre><code class="language-bash">&gt; touch index.js
-</code></pre>
-<p>Make a new file called <code>app.js</code>.</p>
-<pre><code class="language-bash">&gt; touch app.js
-</code></pre>
-<p>Make a new file called <code>Dockerfile</code>.</p>
-<pre><code class="language-bash">&gt; touch Dockerfile
-</code></pre>
-<p>Make a new file called <code>.dockerignore</code>.</p>
-<pre><code class="language-bash">&gt; touch .dockerignore
-</code></pre>
-<p>Make a new file called <code>docker-compose.yml</code>.</p>
-<pre><code class="language-bash">&gt; touch docker-compose.yml
-</code></pre>
-<h1><a class="header" href="#basic-koa-app" id="basic-koa-app">Basic Koa App</a></h1>
-<p>Edit app.js:</p>
-<pre><code class="language-js">const Koa = require('koa');
-const app = new Koa();
-
-app.use(async ctx =&gt; {
-  ctx.body = 'Hello World';
-});
-
-module.exports = app;
-</code></pre>
-<p>Edit index.js:</p>
-<pre><code class="language-js">const app = require('./app');
-// Default the port to 8080
-const port = process.env.PORT || 8080;
-
-app.listen(port, () =&gt; {
-    console.log(`App running on port ${port}`);
-});
-</code></pre>
-<p>Edit package.json, add a <code>&quot;dev&quot;</code> property to the <code>&quot;scripts&quot;</code> object:</p>
-<pre><code class="language-json">&quot;scripts&quot;: {
-    &quot;dev&quot;: &quot;nodemon index.js&quot;
-},
-</code></pre>
-<h3><a class="header" href="#run-the-app" id="run-the-app">Run the App</a></h3>
-<p>We can now run our very basic app:</p>
-<pre><code class="language-bash">&gt; npm run dev
-</code></pre>
-<p>If we go to <a href="http://localhost:8080">localhost:8080</a>, we should see <code>Hello world</code>! This is cool, but we have some things to understand about Koa apps. For now, let's create a simple Dockerfile for our very basic application...</p>
-<h1><a class="header" href="#docker-files" id="docker-files">Docker Files</a></h1>
-<p>Edit the <code>Dockerfile</code>: </p>
-<pre><code class="language-Dockerfile">FROM node:lts-alpine
-
-COPY . .
-
-RUN npm i
-
-EXPOSE 8080
-
-CMD [ &quot;node&quot;, &quot;index.js&quot; ]
-</code></pre>
-<p>Edit the <code>.dockerignore</code> file: </p>
-<pre><code class="language-ignore">.git
-node_modules/
-</code></pre>
-<p>Edit the <code>docker-compose.yml</code> file: </p>
-<pre><code class="language-yml">version: '3.8'
-services:
-  mongo:
-    image: 'mongo:latest'
-    container_name: 'mongodb'
-    environment: 
-      - MONGO_INITDB_DATABASE=map
-      - MONGO_INITDB_ROOT_USERNAME=user
-      - MONGO_INITDB_ROOT_PASSWORD=pass
-    volumes: 
-      - ./mongo-volume:/data/db
-    ports:
-      - '27017-27019:27017-27019'
-</code></pre>
-<p>At this point, we can run the following command to start up a Mongo Database!</p>
-<pre><code class="language-bash">docker-compose up -d
-</code></pre>
-<p>It will take a while, but your Mongo instance should come up. We can verify by running:</p>
-<pre><code class="language-bash">&gt; docker ps
-# Returns:
-# CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS       
-# 6bba9117fccc   mongo:latest   &quot;docker-entrypoint.s…&quot;   35 seconds ago   Up 34 seconds
-</code></pre>
-<p>To stop the Mongo Container, run:</p>
-<pre><code class="language-bash">docker-compose down --remove-orphans
-</code></pre>
-<p>We can add our Postgres DB Service as well, add the following <code>postgres:</code> section below the <code>mongo:</code> section:</p>
-<pre><code class="language-yml">  mongo:
-    ...
-  postgres:
-    image: 'postgres:12'
-    container_name: 'postgresdb'
-    environment: 
-      - POSTGRES_DB=map
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=pass
-    ports: 
-      - '5432:5432'
-</code></pre>
-<p>Now we can run <code>docker-compose up -d</code> and <code>docker-compose down</code> to start and stop both Mongo and Postgres!</p>
-<h1><a class="header" href="#create-github-repo" id="create-github-repo">Create GitHub Repo</a></h1>
-<p>Login to <a href="https://github.com">GitHub</a> and <a href="https://github.com/new">Create a Repository</a>.</p>
-<p>Give it a name, like <code>map-api</code>. </p>
-<p>I'll keep mine public and I <strong>won't</strong> create the README, .gitignore, or License files at this time.</p>
-<p>Click <code>Create Repository</code>.</p>
-<p>It will then display instructions on how to add code... Head back to VSCode. In the terminal, in the project directory, enter:</p>
-<pre><code class="language-bash">&gt; git init
-# Returns: Initialized empty Git repository ...
-</code></pre>
-<blockquote>
-<p>At this point, we want to create a <code>.gitignore</code> file! </p>
-</blockquote>
-<pre><code class="language-bash">touch .gitignore
-</code></pre>
-<p>Any files or folders we list in the <code>.gitignore</code> will be ignored by Git and won't be pushed to our remote repository.</p>
-<p>Edit <code>.gitignore</code> and add <code>node_modules/</code>, and <code>mongo-volume/</code>:</p>
-<pre><code class="language-ignore">node_modules/
-mongo-volume/
-</code></pre>
-<p>Then enter;</p>
-<pre><code class="language-bash">&gt; git add --all
-&gt; git commit -m &quot;First commit - basic Koa app&quot;
-# Returns: create mode...
-&gt; git branch -M main
-</code></pre>
-<p>The instructions on GitHub will tell you to add the remote origin, something like this (replace <code>&lt;your-username&gt;</code> below):</p>
-<pre><code class="language-bash">&gt; git remote add origin git@github.com:&lt;your-username&gt;/map-api.git
-</code></pre>
-<p>We can now push our code to GitHub! Enter;</p>
-<pre><code class="language-bash">&gt; git push -u origin main
-</code></pre>
-<p>Now if we refresh the GitHub page with the instructions on it, it will have all of our code!</p>
 
                     </main>
 
@@ -381,6 +194,10 @@ mongo-volume/
                         <!-- Mobile navigation buttons -->
                         
 
+                        
+                            <a rel="next" href="chapter_1/chapter_1.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -391,6 +208,10 @@ mongo-volume/
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
 
+                
+                    <a rel="next" href="chapter_1/chapter_1.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
                 
             </nav>
 
@@ -423,14 +244,6 @@ mongo-volume/
         <!-- Custom JS scripts -->
         
 
-        
-        
-        <script type="text/javascript">
-        window.addEventListener('load', function() {
-            window.setTimeout(window.print, 100);
-        });
-        </script>
-        
         
 
     </body>
