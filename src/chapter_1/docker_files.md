@@ -70,3 +70,21 @@ We can add our Postgres DB Service as well, add the following `postgres:` sectio
 ```
 
 Now we can run `docker-compose up -d` and `docker-compose down` to start and stop both Mongo and Postgres!
+
+The `up` command will create and start all containers in the `docker-compose.yml` file.
+Similarly, the `down` command will stop and remove all containers in the `docker-compose.yml` file.
+
+We can also run:
+
+```bash
+> docker-compose up --no-start
+> docker-compose start mongo
+```
+
+To _just_ start the Mongo container. And then:
+
+```bash
+> docker-compose stop mongo
+```
+
+To stop _just_ the Mongo container. Note that this doesn't remove/delete the container, just stops it from running.

@@ -10,7 +10,7 @@
     - [Create Docker Files](./chapter_1/docker_files.md)
     - [Create GitHub Repo](./chapter_1/github_repo.md)
 - [Design and Build API](./chapter_2/api_design.md)
-    - [Koa Routing]()
+    - [Koa Routing](./chapter_2/koa_routing.md)
     - [Models]()
     - [Connect Postgres]()
     - [Connect Mongo]()
