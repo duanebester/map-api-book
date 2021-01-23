@@ -12,3 +12,5 @@ This book will cover:
     * Koa API Framework
     * Connect to Mongo
     * Connect to Postgres
+    * Authentication
+    * Testing
