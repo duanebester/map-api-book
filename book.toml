@@ -3,7 +3,7 @@ authors = ["Duane Bester"]
 language = "en"
 multilingual = false
 src = "src"
-title = "Map API Book"
+title = "Map API | A Full Stack JS Book"
 
 [output.html]
 git-repository-url = "https://github.com/duanebester/map-api-book"
