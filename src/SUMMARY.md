@@ -1,7 +1,7 @@
 # Summary
 
-# Introduction
-- [Introduction](./intro.md)
+
+- [Introduction](./intro/intro.md)
 # BackEnd
 - [Setup API Server](./chapter_1/chapter_1.md)
     - [Prerequisites](./chapter_1/prerequisites.md)
