@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Map API Book</title>
+        <title>Map API | A Full Stack JS Book</title>
         
         <meta name="robots" content="noindex" />
         
@@ -97,7 +97,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="intro/intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">BackEnd</li><li class="chapter-item expanded "><a href="chapter_1/chapter_1.html"><strong aria-hidden="true">2.</strong> Setup API Server</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_1/prerequisites.html"><strong aria-hidden="true">2.1.</strong> Prerequisites</a></li><li class="chapter-item expanded "><a href="chapter_1/create_project.html"><strong aria-hidden="true">2.2.</strong> Create Project</a></li><li class="chapter-item expanded "><a href="chapter_1/basic_koa_app.html"><strong aria-hidden="true">2.3.</strong> Basic Koa App</a></li><li class="chapter-item expanded "><a href="chapter_1/docker_files.html"><strong aria-hidden="true">2.4.</strong> Create Docker Files</a></li><li class="chapter-item expanded "><a href="chapter_1/github_repo.html"><strong aria-hidden="true">2.5.</strong> Create GitHub Repo</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.</strong> Design and Build API</div></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">3.1.</strong> Koa Basics</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.2.</strong> Models</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.3.</strong> Connect Postgres</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.4.</strong> Connect Mongo</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> Testing API</div></li><li class="chapter-item expanded affix "><li class="part-title">FrontEnd</li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> Setup React App</div></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="intro/intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">BackEnd</li><li class="chapter-item expanded "><a href="chapter_1/setup_api_server.html"><strong aria-hidden="true">2.</strong> Setup API Server</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_1/prerequisites.html"><strong aria-hidden="true">2.1.</strong> Prerequisites</a></li><li class="chapter-item expanded "><a href="chapter_1/create_project.html"><strong aria-hidden="true">2.2.</strong> Create Project</a></li><li class="chapter-item expanded "><a href="chapter_1/basic_koa_app.html"><strong aria-hidden="true">2.3.</strong> Basic Koa App</a></li><li class="chapter-item expanded "><a href="chapter_1/docker_files.html"><strong aria-hidden="true">2.4.</strong> Create Docker Files</a></li><li class="chapter-item expanded "><a href="chapter_1/github_repo.html"><strong aria-hidden="true">2.5.</strong> Create GitHub Repo</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2/api_design.html"><strong aria-hidden="true">3.</strong> Design and Build API</a></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">3.1.</strong> Koa Routing</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.2.</strong> Models</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.3.</strong> Connect Postgres</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.4.</strong> Connect Mongo</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> Testing API</div></li><li class="chapter-item expanded affix "><li class="part-title">FrontEnd</li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> Setup React App</div></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -129,7 +129,7 @@
                         
                     </div>
 
-                    <h1 class="menu-title">Map API Book</h1>
+                    <h1 class="menu-title">Map API | A Full Stack JS Book</h1>
 
                     <div class="right-buttons">
                         
@@ -214,8 +214,37 @@
 <p>For our Map project, we need a robust and easy to use API Server. Luckily <a href="https://koajs.com/">Koa</a> fits these requirements and is a nice API framework to use.</p>
 <p>From the Koa website:</p>
 <p><em>&quot;A Koa application is an object containing an array of middleware functions which are composed and executed in a stack-like manner upon request.&quot;</em></p>
+<p>The most basic Koa app with a single middleware, that returns &quot;Hello world&quot; for all requests is:</p>
+<pre><code class="language-js">const Koa = require('koa');
+const app = new Koa();
+
+app.use(async ctx =&gt; {
+  ctx.body = 'Hello World';
+});
+
+app.listen(3000);
+</code></pre>
 <p>We can visualize the http request flowing through the layers like so:</p>
 <p><img src="chapter_1/../assets/koa_app.png" alt="Koa App" /></p>
+<p>Other frameworks, like <a href="https://expressjs.com/">Express.js</a>, will employ a top-down middleware flow similar to this:</p>
+<img src="chapter_1/../assets/express_app.png" width="500">
+<p>This is not quite what Koa does.</p>
+<p>Koa uses a cascade technique. Let's update our app to include a middleware function that logs how long each request took. A function would look like this:</p>
+<pre><code class="language-js">// time middleware
+app.use(async (ctx, next) =&gt; {
+  // Get current time
+  const start = Date.now();
+  // Call next middleware function...
+  await next();
+  // Subtract start from new current time
+  const ms = Date.now() - start;
+  // Log the duration
+  console.log(`Request took ${ms}ms`);
+});
+</code></pre>
+<p>The request would flow to the time middleware, would then flow to the next middleware which adds &quot;Hello world&quot; to the responses' body, and back to the time middleware:</p>
+<p><img src="chapter_1/../assets/koa_app_cascade.png" alt="Koa App Cascade" /></p>
+<p>I encourage you to read the overview on the <a href="https://koajs.com/">Koa website</a> to gain some intuition. We will abstract away some of these core ideas by leveraging the <a href="https://github.com/ZijianHe/koa-router">Koa Router</a> pakage so no worries! More to come later!</p>
 <h1><a class="header" href="#prerequisites" id="prerequisites">Prerequisites</a></h1>
 <h4><a class="header" href="#tools" id="tools">Tools</a></h4>
 <ul>
@@ -400,6 +429,13 @@ mongo-volume/
 <pre><code class="language-bash">&gt; git push -u origin main
 </code></pre>
 <p>Now if we refresh the GitHub page with the instructions on it, it will have all of our code!</p>
+<h1><a class="header" href="#design-and-build-api" id="design-and-build-api">Design and Build API</a></h1>
+<p>One of the biggest problems with software today is that people do not spend enough time in the &quot;design&quot; phase. It has become easier to iterate and change code, but if we spend some extra time up front and think through our system, we will mitigate a lot of potential changes.</p>
+<p>Why are we using two different databases?</p>
+<p>For the purpose of this course, it's to show you how to setup two different kinds of databases. In reality, we could use either one for Users and Data with GPS coordinates. Mongo is more freeform and has a nice way to query and aggregate with GPS. Postgres is relational and suites models that are connected to eachother. For example, if we have a User, and that user has a few addresses, we have a One To Many relationship. We could get Mongo to play well with relationships, and we can make Postgres aggregate based on latitude/longitude, but we will learn a bit about both and leverage their strengths.</p>
+<p>My advice for a real world application: If you don't know how your data will be structured and connected, prototype with a NoSQL database such as Mongo. If you have well-defined models that have structured relationships go with Postgres. </p>
+<p>So right now our system might be something like this:</p>
+<p><img src="chapter_2/../assets/system_one.png" alt="System One" /></p>
 
                     </main>
 

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Introduction - Map API | A Full Stack JS Book</title>
+        <title>Setup API Server - Map API | A Full Stack JS Book</title>
         
         
 
@@ -18,28 +18,28 @@
         <meta name="theme-color" content="#ffffff" />
 
         
-        <link rel="icon" href="favicon.svg">
+        <link rel="icon" href="../favicon.svg">
         
         
-        <link rel="shortcut icon" href="favicon.png">
+        <link rel="shortcut icon" href="../favicon.png">
         
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
         
-        <link rel="stylesheet" href="css/print.css" media="print">
+        <link rel="stylesheet" href="../css/print.css" media="print">
         
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
         
-        <link rel="stylesheet" href="fonts/fonts.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
         
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
         
@@ -49,7 +49,7 @@
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
-            var path_to_root = "";
+            var path_to_root = "../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="intro/intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">BackEnd</li><li class="chapter-item expanded "><a href="chapter_1/setup_api_server.html"><strong aria-hidden="true">2.</strong> Setup API Server</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_1/prerequisites.html"><strong aria-hidden="true">2.1.</strong> Prerequisites</a></li><li class="chapter-item expanded "><a href="chapter_1/create_project.html"><strong aria-hidden="true">2.2.</strong> Create Project</a></li><li class="chapter-item expanded "><a href="chapter_1/basic_koa_app.html"><strong aria-hidden="true">2.3.</strong> Basic Koa App</a></li><li class="chapter-item expanded "><a href="chapter_1/docker_files.html"><strong aria-hidden="true">2.4.</strong> Create Docker Files</a></li><li class="chapter-item expanded "><a href="chapter_1/github_repo.html"><strong aria-hidden="true">2.5.</strong> Create GitHub Repo</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2/api_design.html"><strong aria-hidden="true">3.</strong> Design and Build API</a></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">3.1.</strong> Koa Routing</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.2.</strong> Models</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.3.</strong> Connect Postgres</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.4.</strong> Connect Mongo</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> Testing API</div></li><li class="chapter-item expanded affix "><li class="part-title">FrontEnd</li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> Setup React App</div></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro/intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">BackEnd</li><li class="chapter-item expanded "><a href="../chapter_1/setup_api_server.html" class="active"><strong aria-hidden="true">2.</strong> Setup API Server</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/prerequisites.html"><strong aria-hidden="true">2.1.</strong> Prerequisites</a></li><li class="chapter-item expanded "><a href="../chapter_1/create_project.html"><strong aria-hidden="true">2.2.</strong> Create Project</a></li><li class="chapter-item expanded "><a href="../chapter_1/basic_koa_app.html"><strong aria-hidden="true">2.3.</strong> Basic Koa App</a></li><li class="chapter-item expanded "><a href="../chapter_1/docker_files.html"><strong aria-hidden="true">2.4.</strong> Create Docker Files</a></li><li class="chapter-item expanded "><a href="../chapter_1/github_repo.html"><strong aria-hidden="true">2.5.</strong> Create GitHub Repo</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/api_design.html"><strong aria-hidden="true">3.</strong> Design and Build API</a></li><li><ol class="section"><li class="chapter-item expanded "><div><strong aria-hidden="true">3.1.</strong> Koa Routing</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.2.</strong> Models</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.3.</strong> Connect Postgres</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.4.</strong> Connect Mongo</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> Testing API</div></li><li class="chapter-item expanded affix "><li class="part-title">FrontEnd</li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> Setup React App</div></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -131,7 +131,7 @@
 
                     <div class="right-buttons">
                         
-                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
                         
@@ -167,56 +167,54 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#introduction" id="introduction">Introduction</a></h1>
-<h3><a class="header" href="#plot" id="plot">Plot</a></h3>
-<p>Imagine we have various GPS data; perhaps car accidents, or windmills, or oil wells. We would like a web application to display our data, perferrably on a map, in a React application. We also want to save the Geo data in Mongo and User data in Postgres at the same time. The User data will be for our users to create accounts and login. The app will have a robust RESTful API written with the Koa framework in Node.js. We will also leverage Docker to deploy this application stack to any cloud provider. I'll provide additional, optional, videos at the end of the course to add GraphQL to our application, but these won't go into the depth of GraphQL fundamentals.</p>
-<p>This book will cover getting up and running with the basics of a full-stack application:</p>
-<ul>
-<li>React
-<ul>
-<li>Displaying Data with Mapbox</li>
-<li>Material UI - React Components</li>
-<li>Loading Screens / Skeletons</li>
-<li>React Testing Library</li>
-</ul>
-</li>
-<li>Node.js
-<ul>
-<li>Koa API Framework
-<ul>
-<li>Middleware</li>
-</ul>
-</li>
-<li>Testing
-<ul>
-<li>Unit Tests</li>
-<li>Integration Tests</li>
-</ul>
-</li>
-<li>Authentication</li>
-<li>GraphQL</li>
-</ul>
-</li>
-<li>MongoDB</li>
-<li>Postgres</li>
-<li>Cloud Providers
-<ul>
-<li>Digital Ocean</li>
-<li>Google Cloud</li>
-<li>Amazon Web Services</li>
-<li>Mongo Atlas</li>
-</ul>
-</li>
-</ul>
+                        <h1><a class="header" href="#setup-api-server" id="setup-api-server">Setup API Server</a></h1>
+<p>For our Map project, we need a robust and easy to use API Server. Luckily <a href="https://koajs.com/">Koa</a> fits these requirements and is a nice API framework to use.</p>
+<p>From the Koa website:</p>
+<p><em>&quot;A Koa application is an object containing an array of middleware functions which are composed and executed in a stack-like manner upon request.&quot;</em></p>
+<p>The most basic Koa app with a single middleware, that returns &quot;Hello world&quot; for all requests is:</p>
+<pre><code class="language-js">const Koa = require('koa');
+const app = new Koa();
+
+app.use(async ctx =&gt; {
+  ctx.body = 'Hello World';
+});
+
+app.listen(3000);
+</code></pre>
+<p>We can visualize the http request flowing through the layers like so:</p>
+<p><img src="../assets/koa_app.png" alt="Koa App" /></p>
+<p>Other frameworks, like <a href="https://expressjs.com/">Express.js</a>, will employ a top-down middleware flow similar to this:</p>
+<img src="../assets/express_app.png" width="500">
+<p>This is not quite what Koa does.</p>
+<p>Koa uses a cascade technique. Let's update our app to include a middleware function that logs how long each request took. A function would look like this:</p>
+<pre><code class="language-js">// time middleware
+app.use(async (ctx, next) =&gt; {
+  // Get current time
+  const start = Date.now();
+  // Call next middleware function...
+  await next();
+  // Subtract start from new current time
+  const ms = Date.now() - start;
+  // Log the duration
+  console.log(`Request took ${ms}ms`);
+});
+</code></pre>
+<p>The request would flow to the time middleware, would then flow to the next middleware which adds &quot;Hello world&quot; to the responses' body, and back to the time middleware:</p>
+<p><img src="../assets/koa_app_cascade.png" alt="Koa App Cascade" /></p>
+<p>I encourage you to read the overview on the <a href="https://koajs.com/">Koa website</a> to gain some intuition. We will abstract away some of these core ideas by leveraging the <a href="https://github.com/ZijianHe/koa-router">Koa Router</a> pakage so no worries! More to come later!</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
+                            <a rel="prev" href="../intro/intro.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
 
                         
-                            <a rel="next" href="chapter_1/setup_api_server.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../chapter_1/prerequisites.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -228,9 +226,13 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
+                    <a rel="prev" href="../intro/intro.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
 
                 
-                    <a rel="next" href="chapter_1/setup_api_server.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../chapter_1/prerequisites.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
@@ -253,14 +255,14 @@
         
 
         
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
         
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
         
