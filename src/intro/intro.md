@@ -1,15 +1,27 @@
 # Introduction
 
 ### Plot
-Imagine we need a web application to display various data, where each bit of data has a latitude and longitude. We would like to display this on a Map, in a React application. We also want to save the Geo data in Mongo and User data in Postgres at the same time. The app will have a robust RESTful API written with the Koa framework in Node.js. We will also leverage Docker to deploy this application stack to any cloud provider.
+Imagine we have various GPS data; perhaps car accidents, or windmills, or oil wells. We would like a web application to display our data, perferrably on a map, in a React application. We also want to save the Geo data in Mongo and User data in Postgres at the same time. The User data will be for our users to create accounts and login. The app will have a robust RESTful API written with the Koa framework in Node.js. We will also leverage Docker to deploy this application stack to any cloud provider. I'll provide additional, optional, videos at the end of the course to add GraphQL to our application, but these won't go into the depth of GraphQL fundamentals.
 
-This book will cover:
+This book will cover getting up and running with the basics of a full-stack application:
 
-* React + Mapbox
-    * Displaying Geo Data on a Mapbox map
+* React
+    * Displaying Data with Mapbox
+    * Material UI - React Components
+    * Loading Screens / Skeletons
+    * React Testing Library
 * Node.js
     * Koa API Framework
-    * Connect to Mongo
-    * Connect to Postgres
-    * Authentication
+        * Middleware
     * Testing
+        * Unit Tests
+        * Integration Tests
+    * Authentication
+    * GraphQL
+* MongoDB
+* Postgres
+* Cloud Providers
+    * Digital Ocean
+    * Google Cloud
+    * Amazon Web Services
+    * Mongo Atlas

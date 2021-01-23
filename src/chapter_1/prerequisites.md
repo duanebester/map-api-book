@@ -11,6 +11,7 @@
 #### Accounts
 * Create a [GitHub](https://github.com/) Account
 * Create a [DigitalOcean](https://digitalocean.com/) Account
+* Create a [Mapbox](https://account.mapbox.com/) Account
 
 ### Verifying Installs
 
