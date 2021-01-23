@@ -171,26 +171,51 @@
                     <main>
                         <h1><a class="header" href="#introduction" id="introduction">Introduction</a></h1>
 <h3><a class="header" href="#plot" id="plot">Plot</a></h3>
-<p>Imagine we need a web application to display various data, where each bit of data has a latitude and longitude. We would like to display this on a Map, in a React application. We also want to save the Geo data in Mongo and User data in Postgres at the same time. The app will have a robust RESTful API written with the Koa framework in Node.js. We will also leverage Docker to deploy this application stack to any cloud provider.</p>
-<p>This book will cover:</p>
+<p>Imagine we have various GPS data; perhaps car accidents, or windmills, or oil wells. We would like a web application to display our data, perferrably on a map, in a React application. We also want to save the Geo data in Mongo and User data in Postgres at the same time. The User data will be for our users to create accounts and login. The app will have a robust RESTful API written with the Koa framework in Node.js. We will also leverage Docker to deploy this application stack to any cloud provider. I'll provide additional, optional, videos at the end of the course to add GraphQL to our application, but these won't go into the depth of GraphQL fundamentals.</p>
+<p>This book will cover getting up and running with the basics of a full-stack application:</p>
 <ul>
-<li>React + Mapbox
+<li>React
 <ul>
-<li>Displaying Geo Data on a Mapbox map</li>
+<li>Displaying Data with Mapbox</li>
+<li>Material UI - React Components</li>
+<li>Loading Screens / Skeletons</li>
+<li>React Testing Library</li>
 </ul>
 </li>
 <li>Node.js
 <ul>
-<li>Koa API Framework</li>
-<li>Connect to Mongo</li>
-<li>Connect to Postgres</li>
+<li>Koa API Framework
+<ul>
+<li>Middleware</li>
+</ul>
+</li>
+<li>Testing
+<ul>
+<li>Unit Tests</li>
+<li>Integration Tests</li>
+</ul>
+</li>
 <li>Authentication</li>
-<li>Testing</li>
+<li>GraphQL</li>
+</ul>
+</li>
+<li>MongoDB</li>
+<li>Postgres</li>
+<li>Cloud Providers
+<ul>
+<li>Digital Ocean</li>
+<li>Google Cloud</li>
+<li>Amazon Web Services</li>
+<li>Mongo Atlas</li>
 </ul>
 </li>
 </ul>
 <h1><a class="header" href="#setup-api-server" id="setup-api-server">Setup API Server</a></h1>
 <p>For our Map project, we need a robust and easy to use API Server. Luckily <a href="https://koajs.com/">Koa</a> fits these requirements and is a nice API framework to use.</p>
+<p>From the Koa website:</p>
+<p><em>&quot;A Koa application is an object containing an array of middleware functions which are composed and executed in a stack-like manner upon request.&quot;</em></p>
+<p>We can visualize the http request flowing through the layers like so:</p>
+<p><img src="chapter_1/../assets/koa_app.png" alt="Koa App" /></p>
 <h1><a class="header" href="#prerequisites" id="prerequisites">Prerequisites</a></h1>
 <h4><a class="header" href="#tools" id="tools">Tools</a></h4>
 <ul>
@@ -211,6 +236,7 @@
 <ul>
 <li>Create a <a href="https://github.com/">GitHub</a> Account</li>
 <li>Create a <a href="https://digitalocean.com/">DigitalOcean</a> Account</li>
+<li>Create a <a href="https://account.mapbox.com/">Mapbox</a> Account</li>
 </ul>
 <h3><a class="header" href="#verifying-installs" id="verifying-installs">Verifying Installs</a></h3>
 <p>Open a terminal, type and enter:</p>
