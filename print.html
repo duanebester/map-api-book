@@ -447,6 +447,27 @@ mongo-volume/
 <p>So right now our system might be something like this:</p>
 <p><img src="chapter_2/../assets/system_one.png" alt="System One" /></p>
 <h1><a class="header" href="#koa-routing" id="koa-routing">Koa Routing</a></h1>
+<p>Lets install the Koa Router:</p>
+<pre><code class="language-bash">&gt; npm i koa-router
+</code></pre>
+<p>We then update <code>app.js</code> as follows:</p>
+<pre><code class="language-js">const Koa = require('koa');
+const Router = require('koa-router');
+
+const app = new Koa();
+const router = new Router();
+
+router.get('/', (ctx, next) =&gt; {
+    ctx.body = 'Hello World';
+});
+
+app
+  .use(router.routes())
+  .use(router.allowedMethods());
+
+module.exports = app;
+</code></pre>
+<p>Again, going to <a href="http://localhost:8080">localhost:8080</a> will return a &quot;Hello World&quot;.</p>
 
                     </main>
 
