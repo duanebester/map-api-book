@@ -16,7 +16,7 @@ Create an NPM project:
 #### Install dependencies
 
 ```bash
-> npm i koa nodemon
+> npm i express nodemon
 ```
 
 #### App files

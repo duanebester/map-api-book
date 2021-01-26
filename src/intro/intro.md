@@ -11,7 +11,7 @@ This book will cover getting up and running with the basics of a full-stack appl
     * Loading Screens / Skeletons
     * React Testing Library
 * Node.js
-    * Koa API Framework
+    * Express API Framework
         * Middleware
     * Testing
         * Unit Tests
@@ -19,7 +19,9 @@ This book will cover getting up and running with the basics of a full-stack appl
     * Authentication
     * GraphQL
 * MongoDB
+    * Official Node Driver
 * Postgres
+    * Sequelize
 * Cloud Providers
     * Digital Ocean
     * Google Cloud
