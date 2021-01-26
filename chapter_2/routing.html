@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Koa Routing - Map API | A Full Stack JS Book</title>
+        <title>Routing - Map API | A Full Stack JS Book</title>
         
         
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro/intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">BackEnd</li><li class="chapter-item expanded "><a href="../chapter_1/setup_api_server.html"><strong aria-hidden="true">2.</strong> Setup API Server</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/prerequisites.html"><strong aria-hidden="true">2.1.</strong> Prerequisites</a></li><li class="chapter-item expanded "><a href="../chapter_1/create_project.html"><strong aria-hidden="true">2.2.</strong> Create Project</a></li><li class="chapter-item expanded "><a href="../chapter_1/basic_koa_app.html"><strong aria-hidden="true">2.3.</strong> Basic Koa App</a></li><li class="chapter-item expanded "><a href="../chapter_1/docker_files.html"><strong aria-hidden="true">2.4.</strong> Create Docker Files</a></li><li class="chapter-item expanded "><a href="../chapter_1/github_repo.html"><strong aria-hidden="true">2.5.</strong> Create GitHub Repo</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/api_design.html"><strong aria-hidden="true">3.</strong> Design and Build API</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/koa_routing.html" class="active"><strong aria-hidden="true">3.1.</strong> Koa Routing</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.2.</strong> Models</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.3.</strong> Connect Postgres</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.4.</strong> Connect Mongo</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> Testing API</div></li><li class="chapter-item expanded affix "><li class="part-title">FrontEnd</li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> Setup React App</div></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro/intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">BackEnd</li><li class="chapter-item expanded "><a href="../chapter_1/setup_api_server.html"><strong aria-hidden="true">2.</strong> Setup API Server</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/prerequisites.html"><strong aria-hidden="true">2.1.</strong> Prerequisites</a></li><li class="chapter-item expanded "><a href="../chapter_1/create_project.html"><strong aria-hidden="true">2.2.</strong> Create Project</a></li><li class="chapter-item expanded "><a href="../chapter_1/basic_express_app.html"><strong aria-hidden="true">2.3.</strong> Basic Express App</a></li><li class="chapter-item expanded "><a href="../chapter_1/docker_files.html"><strong aria-hidden="true">2.4.</strong> Create Docker Files</a></li><li class="chapter-item expanded "><a href="../chapter_1/github_repo.html"><strong aria-hidden="true">2.5.</strong> Create GitHub Repo</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/api_design.html"><strong aria-hidden="true">3.</strong> Design and Build API</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/routing.html" class="active"><strong aria-hidden="true">3.1.</strong> Routing</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.2.</strong> Models</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.3.</strong> Connect Postgres</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.4.</strong> Connect Mongo</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> Testing API</div></li><li class="chapter-item expanded affix "><li class="part-title">FrontEnd</li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> Setup React App</div></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -167,28 +167,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#koa-routing" id="koa-routing">Koa Routing</a></h1>
-<p>Lets install the Koa Router:</p>
-<pre><code class="language-bash">&gt; npm i koa-router
-</code></pre>
-<p>We then update <code>app.js</code> as follows:</p>
-<pre><code class="language-js">const Koa = require('koa');
-const Router = require('koa-router');
-
-const app = new Koa();
-const router = new Router();
-
-router.get('/', (ctx, next) =&gt; {
-    ctx.body = 'Hello World';
-});
-
-app
-  .use(router.routes())
-  .use(router.allowedMethods());
-
-module.exports = app;
-</code></pre>
-<p>Again, going to <a href="http://localhost:8080">localhost:8080</a> will return a &quot;Hello World&quot;.</p>
+                        <h1><a class="header" href="#routing" id="routing">Routing</a></h1>
 
                     </main>
 
