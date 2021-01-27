@@ -174,6 +174,28 @@
 <p>My advice for a real world application: If you don't know how your data will be structured and connected, prototype with a NoSQL database such as Mongo. If you have well-defined models that have structured relationships go with Postgres. </p>
 <p>So right now our system might be something like this:</p>
 <p><img src="../assets/system_one.png" alt="System One" /></p>
+<p>We can then think of what we want our API endpoints to look like. For retrieving Users, perhaps something like:</p>
+<table><thead><tr><th>Operation</th><th>Request Method</th><th>Request Path</th><th>Response Status</th><th>Response Body</th></tr></thead><tbody>
+<tr><td>Get Users</td><td>GET</td><td><code>/api/&lt;version&gt;/users</code></td><td>200</td><td>[User]</td></tr>
+</tbody></table>
+<p>And if we wanted to just retrieve a User by the user's ID, we can add an <code>/:id</code> to the Path of the above to make a new endpoint:</p>
+<table><thead><tr><th>Operation</th><th>Request Method</th><th>Request Path</th><th>Response Status</th><th>Response Body</th></tr></thead><tbody>
+<tr><td>Get User By ID</td><td>GET</td><td><code>/api/&lt;version&gt;/users/:id</code></td><td>200</td><td>User</td></tr>
+</tbody></table>
+<blockquote>
+<p>It's usually best practice to version API's. We can then support multiple versions of the Get Users endpoint.</p>
+</blockquote>
+<p>For Creating, Retrieveing, Updating and Deleting Users, a flushed out API might look like this:</p>
+<blockquote>
+<p>The <code>5</code> in the Rquest Path below represents the User's ID</p>
+</blockquote>
+<table><thead><tr><th>Operation</th><th>Request Method</th><th>Request Body</th><th>Request Path</th><th>Response Status</th><th>Response Body</th></tr></thead><tbody>
+<tr><td>Get Users</td><td>GET</td><td></td><td>/api/v1/users</td><td>200</td><td>[User]</td></tr>
+<tr><td>Get User By ID</td><td>GET</td><td></td><td>/api/v1/users/5</td><td>200</td><td>User</td></tr>
+<tr><td>Create User</td><td>POST</td><td>User</td><td>/api/v1/users</td><td>201</td><td>User</td></tr>
+<tr><td>Update User</td><td>PUT</td><td>User</td><td>/api/v1/users/5</td><td>200</td><td>User</td></tr>
+<tr><td>Delete User</td><td>DELETE</td><td></td><td>/api/v1/users/5</td><td>204</td><td></td></tr>
+</tbody></table>
 
                     </main>
 
