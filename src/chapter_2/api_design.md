@@ -11,3 +11,29 @@ My advice for a real world application: If you don't know how your data will be 
 So right now our system might be something like this:
 
 ![System One](../assets/system_one.png)
+
+We can then think of what we want our API endpoints to look like. For retrieving Users, perhaps something like:
+
+| Operation | Request Method | Request Path           | Response Status | Response Body |
+|-----------|----------------|------------------------|-----------------|---------------|
+| Get Users | GET            | `/api/<version>/users` | 200             | [User]        |
+
+And if we wanted to just retrieve a User by the user's ID, we can add an `/:id` to the Path of the above to make a new endpoint:
+
+| Operation      | Request Method | Request Path               | Response Status | Response Body |
+|----------------|----------------|----------------------------|-----------------|---------------|
+| Get User By ID | GET            | `/api/<version>/users/:id` | 200             | User          |
+
+> It's usually best practice to version API's. We can then support multiple versions of the Get Users endpoint.
+
+For Creating, Retrieveing, Updating and Deleting Users, a flushed out API might look like this:
+
+> The `5` in the Rquest Path below represents the User's ID
+
+| Operation      | Request Method | Request Body | Request Path    | Response Status | Response Body |
+|----------------|----------------|--------------|-----------------|-----------------|---------------|
+| Get Users      | GET            |              | /api/v1/users   | 200             | [User]        |
+| Get User By ID | GET            |              | /api/v1/users/5 | 200             | User          |
+| Create User    | POST           | User         | /api/v1/users   | 201             | User          |
+| Update User    | PUT            | User         | /api/v1/users/5 | 200             | User          |
+| Delete User    | DELETE         |              | /api/v1/users/5 | 204             |               |

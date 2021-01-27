@@ -29,7 +29,7 @@ mongo-volume/
 Then enter;
 ```bash
 > git add --all
-> git commit -m "First commit - basic Koa app"
+> git commit -m "First commit - basic express app"
 # Returns: create mode...
 > git branch -M main
 ```
