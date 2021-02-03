@@ -26,7 +26,7 @@ And if we wanted to just retrieve a User by the user's ID, we can add an `/:id` 
 
 > It's usually best practice to version API's. We can then support multiple versions of the Get Users endpoint.
 
-For Creating, Retrieveing, Updating and Deleting Users, a flushed out API might look like this:
+For Creating, Retrieving, Updating and Deleting Users, a flushed out API might look like this:
 
 > The `5` in the Rquest Path below represents the User's ID
 
