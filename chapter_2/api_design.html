@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Design and Build API - Map API | A Full Stack JS Book</title>
+        <title>Design and Build API - Mapper | A Full Stack JS Book</title>
         
         
 
@@ -127,7 +127,7 @@
                         
                     </div>
 
-                    <h1 class="menu-title">Map API | A Full Stack JS Book</h1>
+                    <h1 class="menu-title">Mapper | A Full Stack JS Book</h1>
 
                     <div class="right-buttons">
                         
@@ -168,10 +168,10 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#design-and-build-api" id="design-and-build-api">Design and Build API</a></h1>
-<p>One of the biggest problems with software today is that people do not spend enough time in the &quot;design&quot; phase. It has become easier to iterate and change code, but if we spend some extra time up front and think through our system, we will mitigate a lot of potential changes.</p>
+<p>One of the biggest problems with software today is that people do not spend enough time in the &quot;design&quot; phase. It has become easier to iterate and change code, but if we spend some extra time in the beginning to think through our system, we will mitigate a lot of potential changes.</p>
 <p>Why are we using two different databases?</p>
-<p>For the purpose of this course, it's to show you how to setup two different kinds of databases. In reality, we could use either one for Users and Data with GPS coordinates. Mongo is more freeform and has a nice way to query and aggregate with GPS. Postgres is relational and suites models that are connected to eachother. For example, if we have a User, and that user has a few addresses, we have a One To Many relationship. We could get Mongo to play well with relationships, and we can make Postgres aggregate based on latitude/longitude, but we will learn a bit about both and leverage their strengths.</p>
-<p>My advice for a real world application: If you don't know how your data will be structured and connected, prototype with a NoSQL database such as Mongo. If you have well-defined models that have structured relationships go with Postgres. </p>
+<p>For the purpose of this course; it's to show you how to setup two different kinds of databases. In reality, we could use either one for Users and Data with GPS coordinates. Mongo is more freeform and has a nice way to query and aggregate with GPS coordinates. Postgres is relational and suites models that are connected to eachother. For example, if we have a User, and that user has a few addresses, we have a One To Many relationship. We <em>could</em> get Mongo to play well with relationships, and we <em>could</em> make Postgres aggregate based on latitude/longitude. For this course, we will learn a bit about both and leverage their strengths.</p>
+<p>My advice for a real world application with limits on design time: If you don't know how your data will be structured and connected, prototype with a NoSQL database such as Mongo. If you have well-defined models that have structured relationships go with Postgres. </p>
 <p>So right now our system might be something like this:</p>
 <p><img src="../assets/system_one.png" alt="System One" /></p>
 <p>We can then think of what we want our API endpoints to look like. For retrieving Users, perhaps something like:</p>
