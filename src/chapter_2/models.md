@@ -1,6 +1,6 @@
 # Models
 
-A User, to us, would at least need properties such as:
+A User, to us, might need properties such as:
 
 * First Name
 * Last Name
@@ -32,17 +32,42 @@ The list goes on and on... For now, let's start simple:
 ### User
 
 * ID
-* First Name
-* Last Name
 * Email
 * Password
 * Date Created
 
-### DataEntry
+### Customer
 
 * ID
 * Name
-* Reading (Value)
-* Latitude
-* Longitude
+* Customer Address
+* Sensors
 * Date Created
+
+### Customer Address
+
+* ID
+* Address One
+* Address Two
+* Zip Code
+* Phone
+* Email
+* Date Created
+
+### Sensor
+
+* ID
+* Name
+* Customer ID
+* Date Created
+
+### SensorEntry
+
+* ID
+* Sensor ID
+* Customer ID
+* Temperature
+* Date Created
+* Location
+    * Latitude
+    * Longitude
