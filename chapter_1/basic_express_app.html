@@ -189,15 +189,19 @@ app.listen(port, () =&gt; {
 });
 </code></pre>
 <p>Edit package.json, add a <code>&quot;dev&quot;</code> property to the <code>&quot;scripts&quot;</code> object:</p>
-<pre><code class="language-json">&quot;scripts&quot;: {
-    &quot;dev&quot;: &quot;nodemon index.js&quot;,
-},
+<pre><code class="language-json">  &quot;scripts&quot;: {
+    &quot;dev&quot;: &quot;nodemon index.js&quot;
+  },
 </code></pre>
 <h3><a class="header" href="#run-the-app" id="run-the-app">Run the App</a></h3>
 <p>We can now run our very basic app:</p>
-<pre><code class="language-bash">&gt; npm run dev
+<pre><code class="language-bash">npm run dev
 </code></pre>
 <p>If we go to <a href="http://localhost:8080">localhost:8080</a>, we should see <code>Hello world</code>! This is cool, so let's create a simple test for our  API to verify this functionality.</p>
+<blockquote>
+<p>Nodemon will watch any code changes we make and automatically reload our server. </p>
+</blockquote>
+<p>We can stop our server from running with (Cmd or Ctrl) + C.</p>
 <h3><a class="header" href="#test-the-app" id="test-the-app">Test the App</a></h3>
 <p>Add a <code>&quot;jest&quot;:</code> section to the <code>package.json</code> file:</p>
 <pre><code class="language-json">  &quot;jest&quot;: {
@@ -207,7 +211,7 @@ app.listen(port, () =&gt; {
     ]
   },
 </code></pre>
-<p>And then add this script to the <code>&quot;scripts&quot;:</code> section of the <code>package.json</code> file:</p>
+<p>And then add the <code>&quot;test&quot;</code> script to the <code>&quot;scripts&quot;:</code> section of the <code>package.json</code> file:</p>
 <pre><code class="language-json">  &quot;scripts&quot;: {
     &quot;dev&quot;: &quot;nodemon index.js&quot;,
     &quot;test&quot;: &quot;NODE_ENV=test jest --testTimeout=10000&quot;,
@@ -219,20 +223,32 @@ const app = require('./app');
 
 describe('GET /', () =&gt; {
   it('responds with Hello World', (done) =&gt; {
+    function hasHelloWorld(res) {
+      if ('Hello World!' !== res.text) throw new Error(&quot;Missing Hello World!&quot;);
+    }
     request(app)
       .get('/')
       .expect(200)
-      .then(response =&gt; {
-          assert(response.body, 'Hello World!');
-          done();
-      })
-      .catch(err =&gt; done(err))
+      .expect(hasHelloWorld)
+      .end(done)
   });
 });
 </code></pre>
-<p>We can now run the following to test our simple app:</p>
+<p>We can now run the following to test our simple app (make sure server isn't running):</p>
 <pre><code class="language-bash">npm run test
 </code></pre>
+<p>We should see our test passes! </p>
+<pre><code class="language-bash"> PASS  ./app.test.js
+  GET /
+    ✓ responds with Hello World (23 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        0.645 s, estimated 1 s
+Ran all test suites.
+</code></pre>
+<p>Onwards, to creating Docker files.</p>
 
                     </main>
 

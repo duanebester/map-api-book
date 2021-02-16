@@ -303,53 +303,53 @@ app.listen(port, () =&gt; {
 </ul>
 <h3><a class="header" href="#verifying-installs" id="verifying-installs">Verifying Installs</a></h3>
 <p>Open a terminal, type and enter:</p>
-<pre><code class="language-bash">&gt; docker ps
+<pre><code class="language-bash">docker ps
 # Returns: CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 </code></pre>
 <p>Same terminal, type and enter:</p>
-<pre><code class="language-bash">&gt; node --version
+<pre><code class="language-bash">node --version
 # Returns: v14.15.4 or similar
 </code></pre>
 <p>Same terminal, type and enter:</p>
-<pre><code class="language-bash">&gt; git --version
+<pre><code class="language-bash">git --version
 # Returns: git version 2.24.3 (Apple Git-128)
 </code></pre>
 <h1><a class="header" href="#create-project" id="create-project">Create Project</a></h1>
 <p>Create a new directory, <code>map-api</code> and then change directory into it:</p>
-<pre><code class="language-bash">&gt; mkdir map-api
-&gt; cd map-api
+<pre><code class="language-bash">mkdir map-api
+cd map-api
 </code></pre>
 <p>Create an NPM project:</p>
-<pre><code class="language-bash">&gt; npm init -y
+<pre><code class="language-bash">npm init -y
 </code></pre>
 <h4><a class="header" href="#install-dependencies" id="install-dependencies">Install dependencies</a></h4>
 <p>Application dependencies:</p>
-<pre><code class="language-bash">&gt; npm i express cors compression helmet
+<pre><code class="language-bash">npm i express cors compression helmet
 </code></pre>
 <p>Development dependencies:</p>
-<pre><code class="language-bash">&gt; npm i -D nodemon jest supertest
+<pre><code class="language-bash">npm i -D nodemon jest supertest
 </code></pre>
 <h4><a class="header" href="#app-files" id="app-files">App files</a></h4>
 <blockquote>
 <p>Note: In the root directory of the project</p>
 </blockquote>
 <p>Make a new file called <code>index.js</code>.</p>
-<pre><code class="language-bash">&gt; touch index.js
+<pre><code class="language-bash">touch index.js
 </code></pre>
 <p>Make a new file called <code>app.js</code>.</p>
-<pre><code class="language-bash">&gt; touch app.js
+<pre><code class="language-bash">touch app.js
 </code></pre>
 <p>Make a new file called <code>app.test.js</code>.</p>
-<pre><code class="language-bash">&gt; touch app.test.js
+<pre><code class="language-bash">touch app.test.js
 </code></pre>
 <p>Make a new file called <code>Dockerfile</code>.</p>
-<pre><code class="language-bash">&gt; touch Dockerfile
+<pre><code class="language-bash">touch Dockerfile
 </code></pre>
 <p>Make a new file called <code>.dockerignore</code>.</p>
-<pre><code class="language-bash">&gt; touch .dockerignore
+<pre><code class="language-bash">touch .dockerignore
 </code></pre>
 <p>Make a new file called <code>docker-compose.yml</code>.</p>
-<pre><code class="language-bash">&gt; touch docker-compose.yml
+<pre><code class="language-bash">touch docker-compose.yml
 </code></pre>
 <h1><a class="header" href="#basic-express-app" id="basic-express-app">Basic Express App</a></h1>
 <h3><a class="header" href="#create-the-app" id="create-the-app">Create the App</a></h3>
@@ -373,15 +373,19 @@ app.listen(port, () =&gt; {
 });
 </code></pre>
 <p>Edit package.json, add a <code>&quot;dev&quot;</code> property to the <code>&quot;scripts&quot;</code> object:</p>
-<pre><code class="language-json">&quot;scripts&quot;: {
-    &quot;dev&quot;: &quot;nodemon index.js&quot;,
-},
+<pre><code class="language-json">  &quot;scripts&quot;: {
+    &quot;dev&quot;: &quot;nodemon index.js&quot;
+  },
 </code></pre>
 <h3><a class="header" href="#run-the-app" id="run-the-app">Run the App</a></h3>
 <p>We can now run our very basic app:</p>
-<pre><code class="language-bash">&gt; npm run dev
+<pre><code class="language-bash">npm run dev
 </code></pre>
 <p>If we go to <a href="http://localhost:8080">localhost:8080</a>, we should see <code>Hello world</code>! This is cool, so let's create a simple test for our  API to verify this functionality.</p>
+<blockquote>
+<p>Nodemon will watch any code changes we make and automatically reload our server. </p>
+</blockquote>
+<p>We can stop our server from running with (Cmd or Ctrl) + C.</p>
 <h3><a class="header" href="#test-the-app" id="test-the-app">Test the App</a></h3>
 <p>Add a <code>&quot;jest&quot;:</code> section to the <code>package.json</code> file:</p>
 <pre><code class="language-json">  &quot;jest&quot;: {
@@ -391,7 +395,7 @@ app.listen(port, () =&gt; {
     ]
   },
 </code></pre>
-<p>And then add this script to the <code>&quot;scripts&quot;:</code> section of the <code>package.json</code> file:</p>
+<p>And then add the <code>&quot;test&quot;</code> script to the <code>&quot;scripts&quot;:</code> section of the <code>package.json</code> file:</p>
 <pre><code class="language-json">  &quot;scripts&quot;: {
     &quot;dev&quot;: &quot;nodemon index.js&quot;,
     &quot;test&quot;: &quot;NODE_ENV=test jest --testTimeout=10000&quot;,
@@ -403,20 +407,32 @@ const app = require('./app');
 
 describe('GET /', () =&gt; {
   it('responds with Hello World', (done) =&gt; {
+    function hasHelloWorld(res) {
+      if ('Hello World!' !== res.text) throw new Error(&quot;Missing Hello World!&quot;);
+    }
     request(app)
       .get('/')
       .expect(200)
-      .then(response =&gt; {
-          assert(response.body, 'Hello World!');
-          done();
-      })
-      .catch(err =&gt; done(err))
+      .expect(hasHelloWorld)
+      .end(done)
   });
 });
 </code></pre>
-<p>We can now run the following to test our simple app:</p>
+<p>We can now run the following to test our simple app (make sure server isn't running):</p>
 <pre><code class="language-bash">npm run test
 </code></pre>
+<p>We should see our test passes! </p>
+<pre><code class="language-bash"> PASS  ./app.test.js
+  GET /
+    ✓ responds with Hello World (23 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        0.645 s, estimated 1 s
+Ran all test suites.
+</code></pre>
+<p>Onwards, to creating Docker files.</p>
 <h1><a class="header" href="#docker-files" id="docker-files">Docker Files</a></h1>
 <p>Edit the <code>Dockerfile</code>: </p>
 <pre><code class="language-Dockerfile">FROM node:lts-alpine
@@ -473,11 +489,11 @@ services:
 <p>The <code>up</code> command will create and start all containers in the <code>docker-compose.yml</code> file.
 Similarly, the <code>down</code> command will stop and remove all containers in the <code>docker-compose.yml</code> file.</p>
 <p>We can also run:</p>
-<pre><code class="language-bash">&gt; docker-compose up --no-start
-&gt; docker-compose start mongo
+<pre><code class="language-bash">docker-compose up --no-start
+docker-compose start mongo
 </code></pre>
 <p>To <em>just</em> start the Mongo container. And then:</p>
-<pre><code class="language-bash">&gt; docker-compose stop mongo
+<pre><code class="language-bash">docker-compose stop mongo
 </code></pre>
 <p>To stop <em>just</em> the Mongo container. Note that this doesn't remove/delete the container, just stops it from running.</p>
 <p>We aren't going to use Postgres, so you can stop call containers (<code>docker-compose down</code>) and remove the <code>postgres:</code> section from the <code>docker-compose.yml</code> file.</p>
@@ -496,7 +512,7 @@ Similarly, the <code>down</code> command will stop and remove all containers in 
 <p>I'll keep mine public and I <strong>won't</strong> create the README, .gitignore, or License files at this time.</p>
 <p>Click <code>Create Repository</code>.</p>
 <p>It will then display instructions on how to add code... Head back to VSCode. In the terminal, in the project directory, enter:</p>
-<pre><code class="language-bash">&gt; git init
+<pre><code class="language-bash">git init
 # Returns: Initialized empty Git repository ...
 </code></pre>
 <blockquote>
@@ -510,16 +526,16 @@ Similarly, the <code>down</code> command will stop and remove all containers in 
 mongo-volume/
 </code></pre>
 <p>Then enter;</p>
-<pre><code class="language-bash">&gt; git add --all
-&gt; git commit -m &quot;First commit - basic express app&quot;
+<pre><code class="language-bash">git add --all
+git commit -m &quot;First commit - basic express app&quot;
 # Returns: create mode...
-&gt; git branch -M main
+git branch -M main
 </code></pre>
 <p>The instructions on GitHub will tell you to add the remote origin, something like this (replace <code>&lt;your-username&gt;</code> below):</p>
-<pre><code class="language-bash">&gt; git remote add origin git@github.com:&lt;your-username&gt;/map-api.git
+<pre><code class="language-bash">git remote add origin git@github.com:&lt;your-username&gt;/map-api.git
 </code></pre>
 <p>We can now push our code to GitHub! Enter;</p>
-<pre><code class="language-bash">&gt; git push -u origin main
+<pre><code class="language-bash">git push -u origin main
 </code></pre>
 <p>Now if we refresh the GitHub page with the instructions on it, it will have all of our code!</p>
 <h1><a class="header" href="#design-and-build-api" id="design-and-build-api">Design and Build API</a></h1>

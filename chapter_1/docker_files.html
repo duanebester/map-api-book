@@ -223,11 +223,11 @@ services:
 <p>The <code>up</code> command will create and start all containers in the <code>docker-compose.yml</code> file.
 Similarly, the <code>down</code> command will stop and remove all containers in the <code>docker-compose.yml</code> file.</p>
 <p>We can also run:</p>
-<pre><code class="language-bash">&gt; docker-compose up --no-start
-&gt; docker-compose start mongo
+<pre><code class="language-bash">docker-compose up --no-start
+docker-compose start mongo
 </code></pre>
 <p>To <em>just</em> start the Mongo container. And then:</p>
-<pre><code class="language-bash">&gt; docker-compose stop mongo
+<pre><code class="language-bash">docker-compose stop mongo
 </code></pre>
 <p>To stop <em>just</em> the Mongo container. Note that this doesn't remove/delete the container, just stops it from running.</p>
 <p>We aren't going to use Postgres, so you can stop call containers (<code>docker-compose down</code>) and remove the <code>postgres:</code> section from the <code>docker-compose.yml</code> file.</p>
