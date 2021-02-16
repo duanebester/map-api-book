@@ -73,14 +73,14 @@ Similarly, the `down` command will stop and remove all containers in the `docker
 We can also run:
 
 ```bash
-> docker-compose up --no-start
-> docker-compose start mongo
+docker-compose up --no-start
+docker-compose start mongo
 ```
 
 To _just_ start the Mongo container. And then:
 
 ```bash
-> docker-compose stop mongo
+docker-compose stop mongo
 ```
 
 To stop _just_ the Mongo container. Note that this doesn't remove/delete the container, just stops it from running.

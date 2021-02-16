@@ -18,20 +18,20 @@
 Open a terminal, type and enter:
 
 ```bash
-> docker ps
+docker ps
 # Returns: CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 ```
 
 Same terminal, type and enter:
 
 ```bash
-> node --version
+node --version
 # Returns: v14.15.4 or similar
 ```
 
 Same terminal, type and enter:
 
 ```bash
-> git --version
+git --version
 # Returns: git version 2.24.3 (Apple Git-128)
 ```

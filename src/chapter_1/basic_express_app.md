@@ -30,9 +30,9 @@ app.listen(port, () => {
 Edit package.json, add a `"dev"` property to the `"scripts"` object:
 
 ```json
-"scripts": {
-    "dev": "nodemon index.js",
-},
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
 ```
 
 ### Run the App
@@ -40,10 +40,14 @@ Edit package.json, add a `"dev"` property to the `"scripts"` object:
 We can now run our very basic app:
 
 ```bash
-> npm run dev
+npm run dev
 ```
 
 If we go to [localhost:8080](http://localhost:8080), we should see `Hello world`! This is cool, so let's create a simple test for our  API to verify this functionality.
+
+> Nodemon will watch any code changes we make and automatically reload our server. 
+
+We can stop our server from running with (Cmd or Ctrl) + C.
 
 ### Test the App
 
@@ -58,7 +62,7 @@ Add a `"jest":` section to the `package.json` file:
   },
 ```
 
-And then add this script to the `"scripts":` section of the `package.json` file:
+And then add the `"test"` script to the `"scripts":` section of the `package.json` file:
 
 ```json
   "scripts": {
@@ -74,19 +78,34 @@ const app = require('./app');
 
 describe('GET /', () => {
   it('responds with Hello World', (done) => {
+    function hasHelloWorld(res) {
+      if ('Hello World!' !== res.text) throw new Error("Missing Hello World!");
+    }
     request(app)
       .get('/')
       .expect(200)
-      .then(response => {
-          assert(response.body, 'Hello World!');
-          done();
-      })
-      .catch(err => done(err))
+      .expect(hasHelloWorld)
+      .end(done)
   });
 });
 ```
 
-We can now run the following to test our simple app:
+We can now run the following to test our simple app (make sure server isn't running):
 ```bash
 npm run test
 ```
+
+We should see our test passes! 
+```bash
+ PASS  ./app.test.js
+  GET /
+    ✓ responds with Hello World (23 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        0.645 s, estimated 1 s
+Ran all test suites.
+```
+
+Onwards, to creating Docker files.

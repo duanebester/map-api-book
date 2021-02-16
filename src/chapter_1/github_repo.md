@@ -10,7 +10,7 @@ Click `Create Repository`.
 
 It will then display instructions on how to add code... Head back to VSCode. In the terminal, in the project directory, enter:
 ```bash
-> git init
+git init
 # Returns: Initialized empty Git repository ...
 ```
 
@@ -28,20 +28,20 @@ mongo-volume/
 
 Then enter;
 ```bash
-> git add --all
-> git commit -m "First commit - basic express app"
+git add --all
+git commit -m "First commit - basic express app"
 # Returns: create mode...
-> git branch -M main
+git branch -M main
 ```
 
 The instructions on GitHub will tell you to add the remote origin, something like this (replace `<your-username>` below):
 ```bash
-> git remote add origin git@github.com:<your-username>/map-api.git
+git remote add origin git@github.com:<your-username>/map-api.git
 ```
 
 We can now push our code to GitHub! Enter;
 ```bash
-> git push -u origin main
+git push -u origin main
 ```
 
 Now if we refresh the GitHub page with the instructions on it, it will have all of our code!
