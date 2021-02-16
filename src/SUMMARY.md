@@ -2,6 +2,7 @@
 
 
 - [Introduction](./intro/intro.md)
+    - [REST Basics](./intro/rest_basics.md)
 # BackEnd
 - [Setup API Server](./chapter_1/setup_api_server.md)
     - [Prerequisites](./chapter_1/prerequisites.md)
@@ -12,8 +13,7 @@
 - [Design and Build API](./chapter_2/api_design.md)
     - [Models](./chapter_2/models.md)
     - [Routing](./chapter_2/routing.md)
-    - [Connect Postgres]()
-    - [Connect Mongo]()
+    - [Connect Mongo](./chapter_2/mongo.md)
 - [Testing API]()
 # FrontEnd
 - [Setup React App]()

@@ -35,38 +35,12 @@ The list goes on and on... For now, let's start simple:
 * Email
 * Password
 * Date Created
+* Favorites
 
-### Customer
-
-* ID
-* Name
-* Customer Address
-* Sensors
-* Date Created
-
-### Customer Address
-
-* ID
-* Address One
-* Address Two
-* Zip Code
-* Phone
-* Email
-* Date Created
-
-### Sensor
+### CoffeeShop
 
 * ID
 * Name
-* Customer ID
-* Date Created
-
-### SensorEntry
-
-* ID
-* Sensor ID
-* Customer ID
-* Temperature
 * Date Created
 * Location
     * Latitude

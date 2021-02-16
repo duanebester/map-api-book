@@ -2,15 +2,13 @@
 
 One of the biggest problems with software today is that people do not spend enough time in the "design" phase. It has become easier to iterate and change code, but if we spend some extra time in the beginning to think through our system, we will mitigate a lot of potential changes.
 
-Why are we using two different databases?
+Why Mongo?
 
-For the purpose of this course; it's to show you how to setup two different kinds of databases. In reality, we could use either one for Users and Data with GPS coordinates. Mongo is more freeform and has a nice way to query and aggregate with GPS coordinates. Postgres is relational and suites models that are connected to eachother. For example, if we have a User, and that user has a few addresses, we have a One To Many relationship. We _could_ get Mongo to play well with relationships, and we _could_ make Postgres aggregate based on latitude/longitude. For this course, we will learn a bit about both and leverage their strengths.
-
-My advice for a real world application with limits on design time: If you don't know how your data will be structured and connected, prototype with a NoSQL database such as Mongo. If you have well-defined models that have structured relationships go with Postgres. 
+Mongo is a NoSQL database, which mostly means it is more freeform and offers us some flexibility in the prototyping phase. It also has a nice way to query and aggregate with GPS coordinates. Mongo documents are essentially JSON documents, so Mongo works well with JavaScript based applications. My advice for a real world application with limits on design time: If you don't know how your data will be structured and connected, prototype with a NoSQL database such as Mongo. If you have well-defined models with structured relationships, then go with a SQL database like Postgres. 
 
 So right now our system might be something like this:
 
-![System One](../assets/system_one.png)
+![System One](../assets/app_design.png)
 
 We can then think of what we want our API endpoints to look like. For retrieving Users, perhaps something like:
 
@@ -28,7 +26,7 @@ And if we wanted to just retrieve a User by the user's ID, we can add an `/:id` 
 
 For "CRUD" (Creating, Retrieving, Updating and Deleting) Users, a flushed out API might look like this:
 
-> The `5` in the Rquest Path below represents the User's ID
+> The `5` in the Request Path below represents the User's ID
 
 | Operation      | Request Method | Request Body | Request Path    | Response Status | Response Body |
 |----------------|----------------|--------------|-----------------|-----------------|---------------|

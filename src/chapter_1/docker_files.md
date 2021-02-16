@@ -26,10 +26,6 @@ services:
   mongo:
     image: 'mongo:latest'
     container_name: 'mongodb'
-    environment: 
-      - MONGO_INITDB_DATABASE=map
-      - MONGO_INITDB_ROOT_USERNAME=user
-      - MONGO_INITDB_ROOT_PASSWORD=pass
     volumes: 
       - ./mongo-volume:/data/db
     ports:
@@ -49,12 +45,12 @@ It will take a while, but your Mongo instance should come up. We can verify by r
 # 6bba9117fccc   mongo:latest   "docker-entrypoint.s…"   35 seconds ago   Up 34 seconds
 ```
 
-To stop the Mongo Container, run:
+To stop the running containers, run:
 ```bash
 docker-compose down --remove-orphans
 ```
 
-We can add our Postgres DB Service as well, add the following `postgres:` section below the `mongo:` section:
+The nice thing about Docker Compose is that we can _compose_ several services together. Say we also wanted to add a Postgres Database. We would do so by adding the following `postgres:` section below the `mongo:` section:
 ```yml
   mongo:
     ...
@@ -88,3 +84,17 @@ To _just_ start the Mongo container. And then:
 ```
 
 To stop _just_ the Mongo container. Note that this doesn't remove/delete the container, just stops it from running.
+
+We aren't going to use Postgres, so you can stop call containers (`docker-compose down`) and remove the `postgres:` section from the `docker-compose.yml` file.
+
+> Removing ununsed Docker objects...
+
+Sometimes after lots of development, you'll get "Out of space" warnings. Usually related to dangling volumes/images/etc. These are resources that we can remove, but then we will lose any saved data. I recommend removing these every now and then:
+```bash
+docker system prune
+```
+
+Volumes aren't removed by default, so to remove those as well:
+```bash
+docker system prune -a
+```

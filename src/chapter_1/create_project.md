@@ -15,8 +15,14 @@ Create an NPM project:
 
 #### Install dependencies
 
+Application dependencies:
 ```bash
-> npm i express nodemon
+> npm i express cors compression helmet
+```
+
+Development dependencies:
+```bash
+> npm i -D nodemon jest supertest
 ```
 
 #### App files
@@ -33,6 +39,12 @@ Make a new file called `app.js`.
 
 ```bash
 > touch app.js
+```
+
+Make a new file called `app.test.js`.
+
+```bash
+> touch app.test.js
 ```
 
 Make a new file called `Dockerfile`.
