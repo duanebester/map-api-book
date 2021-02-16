@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Basic Express App - Mapper | A Full Stack JS Book</title>
+        <title>Connect Mongo - Mapper | A Full Stack JS Book</title>
         
         
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro/intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../intro/rest_basics.html"><strong aria-hidden="true">1.1.</strong> REST Basics</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">BackEnd</li><li class="chapter-item expanded "><a href="../chapter_1/setup_api_server.html"><strong aria-hidden="true">2.</strong> Setup API Server</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/prerequisites.html"><strong aria-hidden="true">2.1.</strong> Prerequisites</a></li><li class="chapter-item expanded "><a href="../chapter_1/create_project.html"><strong aria-hidden="true">2.2.</strong> Create Project</a></li><li class="chapter-item expanded "><a href="../chapter_1/basic_express_app.html" class="active"><strong aria-hidden="true">2.3.</strong> Basic Express App</a></li><li class="chapter-item expanded "><a href="../chapter_1/docker_files.html"><strong aria-hidden="true">2.4.</strong> Create Docker Files</a></li><li class="chapter-item expanded "><a href="../chapter_1/github_repo.html"><strong aria-hidden="true">2.5.</strong> Create GitHub Repo</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/api_design.html"><strong aria-hidden="true">3.</strong> Design and Build API</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/models.html"><strong aria-hidden="true">3.1.</strong> Models</a></li><li class="chapter-item expanded "><a href="../chapter_2/routing.html"><strong aria-hidden="true">3.2.</strong> Routing</a></li><li class="chapter-item expanded "><a href="../chapter_2/mongo.html"><strong aria-hidden="true">3.3.</strong> Connect Mongo</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> Testing API</div></li><li class="chapter-item expanded affix "><li class="part-title">FrontEnd</li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> Setup React App</div></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro/intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../intro/rest_basics.html"><strong aria-hidden="true">1.1.</strong> REST Basics</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">BackEnd</li><li class="chapter-item expanded "><a href="../chapter_1/setup_api_server.html"><strong aria-hidden="true">2.</strong> Setup API Server</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/prerequisites.html"><strong aria-hidden="true">2.1.</strong> Prerequisites</a></li><li class="chapter-item expanded "><a href="../chapter_1/create_project.html"><strong aria-hidden="true">2.2.</strong> Create Project</a></li><li class="chapter-item expanded "><a href="../chapter_1/basic_express_app.html"><strong aria-hidden="true">2.3.</strong> Basic Express App</a></li><li class="chapter-item expanded "><a href="../chapter_1/docker_files.html"><strong aria-hidden="true">2.4.</strong> Create Docker Files</a></li><li class="chapter-item expanded "><a href="../chapter_1/github_repo.html"><strong aria-hidden="true">2.5.</strong> Create GitHub Repo</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/api_design.html"><strong aria-hidden="true">3.</strong> Design and Build API</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/models.html"><strong aria-hidden="true">3.1.</strong> Models</a></li><li class="chapter-item expanded "><a href="../chapter_2/routing.html"><strong aria-hidden="true">3.2.</strong> Routing</a></li><li class="chapter-item expanded "><a href="../chapter_2/mongo.html" class="active"><strong aria-hidden="true">3.3.</strong> Connect Mongo</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> Testing API</div></li><li class="chapter-item expanded affix "><li class="part-title">FrontEnd</li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> Setup React App</div></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -167,71 +167,12 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#basic-express-app" id="basic-express-app">Basic Express App</a></h1>
-<h3><a class="header" href="#create-the-app" id="create-the-app">Create the App</a></h3>
-<p>Edit app.js:</p>
-<pre><code class="language-js">const express = require('express');
-const app = express();
-
-app.get('/', (req, res) =&gt; {
-  res.send('Hello World!');
-});
-
-module.exports = app;
-</code></pre>
-<p>Edit index.js:</p>
-<pre><code class="language-js">const app = require('./app');
-// Default the port to 8080
-const port = process.env.PORT || 8080;
-
-app.listen(port, () =&gt; {
-  console.log(`App running on port: ${port}`)
-});
-</code></pre>
-<p>Edit package.json, add a <code>&quot;dev&quot;</code> property to the <code>&quot;scripts&quot;</code> object:</p>
-<pre><code class="language-json">&quot;scripts&quot;: {
-    &quot;dev&quot;: &quot;nodemon index.js&quot;,
-},
-</code></pre>
-<h3><a class="header" href="#run-the-app" id="run-the-app">Run the App</a></h3>
-<p>We can now run our very basic app:</p>
-<pre><code class="language-bash">&gt; npm run dev
-</code></pre>
-<p>If we go to <a href="http://localhost:8080">localhost:8080</a>, we should see <code>Hello world</code>! This is cool, so let's create a simple test for our  API to verify this functionality.</p>
-<h3><a class="header" href="#test-the-app" id="test-the-app">Test the App</a></h3>
-<p>Add a <code>&quot;jest&quot;:</code> section to the <code>package.json</code> file:</p>
-<pre><code class="language-json">  &quot;jest&quot;: {
-    &quot;testEnvironment&quot;: &quot;node&quot;,
-    &quot;coveragePathIgnorePatterns&quot;: [
-      &quot;/node_modules/&quot;
-    ]
-  },
-</code></pre>
-<p>And then add this script to the <code>&quot;scripts&quot;:</code> section of the <code>package.json</code> file:</p>
-<pre><code class="language-json">  &quot;scripts&quot;: {
-    &quot;dev&quot;: &quot;nodemon index.js&quot;,
-    &quot;test&quot;: &quot;NODE_ENV=test jest --testTimeout=10000&quot;,
-  }
-</code></pre>
-<p>Now we add the following in <code>app.test.js</code> which just checks that a request to our endpoint returns a Status: 200 - Success, and the <code>Hello World!</code> body:</p>
-<pre><code class="language-js">const request = require('supertest');
-const app = require('./app');
-
-describe('GET /', () =&gt; {
-  it('responds with Hello World', (done) =&gt; {
-    request(app)
-      .get('/')
-      .expect(200)
-      .then(response =&gt; {
-          assert(response.body, 'Hello World!');
-          done();
-      })
-      .catch(err =&gt; done(err))
-  });
-});
-</code></pre>
-<p>We can now run the following to test our simple app:</p>
-<pre><code class="language-bash">npm run test
+                        <h1><a class="header" href="#connect-mongo" id="connect-mongo">Connect Mongo</a></h1>
+<blockquote>
+<p>Remember to have Mongo running via Docker (<code>docker-compose up -d</code>)!</p>
+</blockquote>
+<p>To connect to our instance of Mongo running locally we are going to install and use the Mongoose library:</p>
+<pre><code class="language-bash">npm install mongoose
 </code></pre>
 
                     </main>
@@ -239,15 +180,11 @@ describe('GET /', () =&gt; {
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../chapter_1/create_project.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../chapter_2/routing.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
-                        
-                            <a rel="next" href="../chapter_1/docker_files.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -257,15 +194,11 @@ describe('GET /', () =&gt; {
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a rel="prev" href="../chapter_1/create_project.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../chapter_2/routing.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
-                
-                    <a rel="next" href="../chapter_1/docker_files.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
                 
             </nav>
 

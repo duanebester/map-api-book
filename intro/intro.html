@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro/intro.html" class="active"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">BackEnd</li><li class="chapter-item expanded "><a href="../chapter_1/setup_api_server.html"><strong aria-hidden="true">2.</strong> Setup API Server</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/prerequisites.html"><strong aria-hidden="true">2.1.</strong> Prerequisites</a></li><li class="chapter-item expanded "><a href="../chapter_1/create_project.html"><strong aria-hidden="true">2.2.</strong> Create Project</a></li><li class="chapter-item expanded "><a href="../chapter_1/basic_express_app.html"><strong aria-hidden="true">2.3.</strong> Basic Express App</a></li><li class="chapter-item expanded "><a href="../chapter_1/docker_files.html"><strong aria-hidden="true">2.4.</strong> Create Docker Files</a></li><li class="chapter-item expanded "><a href="../chapter_1/github_repo.html"><strong aria-hidden="true">2.5.</strong> Create GitHub Repo</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/api_design.html"><strong aria-hidden="true">3.</strong> Design and Build API</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/models.html"><strong aria-hidden="true">3.1.</strong> Models</a></li><li class="chapter-item expanded "><a href="../chapter_2/routing.html"><strong aria-hidden="true">3.2.</strong> Routing</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.3.</strong> Connect Postgres</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">3.4.</strong> Connect Mongo</div></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> Testing API</div></li><li class="chapter-item expanded affix "><li class="part-title">FrontEnd</li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> Setup React App</div></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro/intro.html" class="active"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../intro/rest_basics.html"><strong aria-hidden="true">1.1.</strong> REST Basics</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">BackEnd</li><li class="chapter-item expanded "><a href="../chapter_1/setup_api_server.html"><strong aria-hidden="true">2.</strong> Setup API Server</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/prerequisites.html"><strong aria-hidden="true">2.1.</strong> Prerequisites</a></li><li class="chapter-item expanded "><a href="../chapter_1/create_project.html"><strong aria-hidden="true">2.2.</strong> Create Project</a></li><li class="chapter-item expanded "><a href="../chapter_1/basic_express_app.html"><strong aria-hidden="true">2.3.</strong> Basic Express App</a></li><li class="chapter-item expanded "><a href="../chapter_1/docker_files.html"><strong aria-hidden="true">2.4.</strong> Create Docker Files</a></li><li class="chapter-item expanded "><a href="../chapter_1/github_repo.html"><strong aria-hidden="true">2.5.</strong> Create GitHub Repo</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/api_design.html"><strong aria-hidden="true">3.</strong> Design and Build API</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/models.html"><strong aria-hidden="true">3.1.</strong> Models</a></li><li class="chapter-item expanded "><a href="../chapter_2/routing.html"><strong aria-hidden="true">3.2.</strong> Routing</a></li><li class="chapter-item expanded "><a href="../chapter_2/mongo.html"><strong aria-hidden="true">3.3.</strong> Connect Mongo</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> Testing API</div></li><li class="chapter-item expanded affix "><li class="part-title">FrontEnd</li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> Setup React App</div></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -169,9 +169,9 @@
                     <main>
                         <h1><a class="header" href="#introduction" id="introduction">Introduction</a></h1>
 <h3><a class="header" href="#about-me" id="about-me">About Me</a></h3>
-<p>Hi there! My name is Duane Bester. I'm an electrical engineer who has been writing professional software for over ten years. I've been involved in various different startups with projects that have ranged from Virtual Reality, Sensors and Hardware Design, to full stack web applications, and pipelines ingesting 100's of thousands of articles a day. This has given me the ability to use many software languages and frameworks over the years. I've come to understand what good software engineering practice looks like, and will go over this in the following chapters. I believe in learning by doing, so we will skip a lot of mundane programming theory and build something practical in a short amount of time. We will start simple and keep things simple. A lot of code &quot;out there&quot; follows Object Oriented programming and tries to do crazy dependency injection patterns, etc. While I'm not for or against this, we will be using a more functional style where we try to compose our functions and move complexity to the edges of our program. If this sentence didn't make sense, that's okay! There is an <a href="https://www.youtube.com/watch?v=vK1DazRK_a0">excellent video</a> of writing procedural code, refactoring to object oriented code, and then functional code by Rafal Dittwald. The title mentions the software language Clojure, but fear not! His examples are written in JavaScript. </p>
+<p>Hi there! My name is Duane Bester. My background is Electrical Engineering, but I have been writing professional software for over ten years now. I've been involved in various different startups with projects that have ranged from Virtual Reality, Sensors and Hardware Design, to full stack web applications and ETL pipelines ingesting 100's of thousands of articles a day. This has given me the ability to use many software languages and frameworks over the years. I've come to understand what good software engineering design looks like, and will go over this in the following chapters. I believe in learning by doing, so we will skip a lot of mundane programming theory and build something practical in a short amount of time. A lot of code &quot;out there&quot; follows Object Oriented Programming (OOP) and tries to do crazy dependency injection patterns, etc. While I'm not for or against this, we will be using a more functional style where we try to compose our functions and move complexity to the edges of our program. If this sentence didn't make sense, that's okay! There is an <a href="https://www.youtube.com/watch?v=vK1DazRK_a0">excellent video</a> of writing procedural code, refactoring to object oriented code, and then functional code by Rafal Dittwald. The title mentions the software language Clojure, but fear not! His examples are written in JavaScript. </p>
 <h3><a class="header" href="#plot" id="plot">Plot</a></h3>
-<p>Imagine we have various GPS data; perhaps car accidents, or windmills, or oil wells. We would like to display our data, perferrably on a map, in a React application. We also want to save the Geo data in Mongo and User data in Postgres at the same time. The User data will be for our users to create accounts and login. The app will have a robust RESTful API written with the Express framework in Node.js. We will also leverage Docker to deploy this application to any cloud provider. I'll provide additional, optional, videos at the end of the course to add GraphQL to our application, but these won't go into the depth of GraphQL fundamentals.</p>
+<p>Imagine we have various data that contains GPS coordinates, like coffee shops. We would like to display our data on a map in a React application. We also want to save User and CoffeeShop data in MongoDB (we will be using Mongo Atlas). The app will have a robust RESTful API written with the Express framework in Node.js. We will also leverage Docker to run services locally as well as for deploying this application to any cloud provider. I'll provide optional videos where we deploy to Google Cloud and AWS.</p>
 <p>This book will cover getting up and running with the basics of a full-stack application:</p>
 <ul>
 <li>React
@@ -195,18 +195,12 @@
 <li>Integration Tests</li>
 </ul>
 </li>
-<li>Authentication</li>
-<li>GraphQL</li>
+<li>User Authentication</li>
 </ul>
 </li>
 <li>MongoDB
 <ul>
-<li>Official Node Driver</li>
-</ul>
-</li>
-<li>Postgres
-<ul>
-<li>Sequelize</li>
+<li>ORM - Mongoose Driver</li>
 </ul>
 </li>
 </ul>
@@ -225,6 +219,7 @@
 </ul>
 </li>
 </ul>
+<p>At the end, I'll provide a link to the full working source code in GitHub. Let's get started!</p>
 
                     </main>
 
@@ -233,7 +228,7 @@
                         
 
                         
-                            <a rel="next" href="../chapter_1/setup_api_server.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../intro/rest_basics.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -247,7 +242,7 @@
                 
 
                 
-                    <a rel="next" href="../chapter_1/setup_api_server.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../intro/rest_basics.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
