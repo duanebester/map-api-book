@@ -11,9 +11,9 @@
     - [Create Docker Files](./chapter_1/docker_files.md)
     - [Create GitHub Repo](./chapter_1/github_repo.md)
 - [Design and Build API](./chapter_2/api_design.md)
+    - [Connect Mongo](./chapter_2/mongo.md)
     - [Models](./chapter_2/models.md)
     - [Routing](./chapter_2/routing.md)
-    - [Connect Mongo](./chapter_2/mongo.md)
 - [Testing API]()
 # FrontEnd
 - [Setup React App]()

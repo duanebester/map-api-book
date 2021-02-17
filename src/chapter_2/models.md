@@ -35,7 +35,7 @@ The list goes on and on... For now, let's start simple:
 * Email
 * Password
 * Date Created
-* Favorites
+* Favorites (list of Coffee Shops)
 
 ### CoffeeShop
 
