@@ -10,33 +10,42 @@ From our design section, our User routes will look like so:
 | Update User    | PUT            | User         | /api/v1/users/:id | 200             | User          |
 | Delete User    | DELETE         |              | /api/v1/users/:id | 204             |               |
 
-Which we can represent using Express' DSL:
+Which we can represent using Express' DSL.
 
+But first, let's import our User model into `app.js`:
 ```js
-const userRouter = express.Router()
+const express = require('express');
+const { User } = require('./models');
+const app = express();
+```
 
-userRouter.get('/users', (req, res) => {
-  // get users
+Now we can add our routes for Users:
+```js
+app.get('/users', (req, res) => {
+  const users = await User.find({});
   res.status(200).send(users)
 })
 
-userRouter.get('/users/:id', (req, res) => {
-  // get user by id
+app.get('/users/:id', (req, res) => {
+  const id = req.params.id;
+  const user = await User.findOneById(id);
   res.status(200).send(user)
 })
 
-userRouter.post('/users', (req, res) => {
-  // create user
+app.post('/users', (req, res) => {
+  const newUser = await User.create(req.body);
   res.status(201).send(newUser)
 })
 
-userRouter.put('/users', (req, res) => {
-  // update user
+app.put('/users:id', (req, res) => {
+  const id = req.params.id;
+  const newUser = await User.findByIdAndUpdate(id, req.body);
   res.status(200).send(updatedUser)
 })
 
-userRouter.delete('/users/:id', async (req, res) => {
-  // delete user by id
+app.delete('/users/:id', async (req, res) => {
+  const id = req.params.id;
+  await User.findByIdAndRemove(id);
   res.status(204).send()
 })
 ```
