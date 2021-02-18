@@ -171,7 +171,7 @@
                     <main>
                         <h1><a class="header" href="#introduction" id="introduction">Introduction</a></h1>
 <h3><a class="header" href="#about-me" id="about-me">About Me</a></h3>
-<p>Hi there! My name is Duane Bester. My background is Electrical Engineering, but I have been writing professional software for over ten years now. I've been involved in various different startups with projects that have ranged from Virtual Reality, Sensors and Hardware Design, to full stack web applications and ETL pipelines ingesting 100's of thousands of articles a day. This has given me the ability to use many software languages and frameworks over the years. I've come to understand what good software engineering design looks like, and will go over this in the following chapters. I believe in learning by doing, so we will skip a lot of mundane programming theory and build something practical in a short amount of time. A lot of code &quot;out there&quot; follows Object Oriented Programming (OOP) and tries to do crazy dependency injection patterns, etc. While I'm not for or against this, we will be using a more functional style where we try to compose our functions and move complexity to the edges of our program. If this sentence didn't make sense, that's okay! There is an <a href="https://www.youtube.com/watch?v=vK1DazRK_a0">excellent video</a> of writing procedural code, refactoring to object oriented code, and then functional code by Rafal Dittwald. The title mentions the software language Clojure, but fear not! His examples are written in JavaScript. </p>
+<p>Hi there! My name is Duane Bester. My background is Electrical Engineering, but I have been writing professional software for over ten years now. I've been involved in various different startups with projects that have ranged from Virtual Reality, Sensors and Hardware Design, to full stack web applications and ETL pipelines ingesting 100's of thousands of articles a day. This has given me the ability to use many software languages and frameworks over the years. I've come to understand what good software engineering design looks like, and will go over this in the following chapters. I believe in learning by doing, so we will skip a lot of mundane programming theory and build something practical in a short amount of time.</p>
 <h3><a class="header" href="#plot" id="plot">Plot</a></h3>
 <p>Imagine we have various data that contains GPS coordinates, like coffee shops. We would like to display our data on a map in a React application. We also want to save User and CoffeeShop data in MongoDB (we will be using Mongo Atlas). The app will have a robust RESTful API written with the Express framework in Node.js. We will also leverage Docker to run services locally as well as for deploying this application to any cloud provider. I'll provide optional videos where we deploy to Google Cloud and AWS.</p>
 <p>This book will cover getting up and running with the basics of a full-stack application:</p>
@@ -628,13 +628,18 @@ module.exports = db
   });
 }
 </code></pre>
+<p>We need to require our db instance in our <code>index.js</code> file:</p>
+<pre><code class="language-js">const db = require('./db');
+
+db.connect('mongodb://localhost:27017/map');
+</code></pre>
 <p>Now when we start our app (<code>npm run dev</code>) we will see this:</p>
 <pre><code class="language-bash">...
 [nodemon] starting `node index.js`
 App running on port: 8080
 Connected to database
 </code></pre>
-<p>Connected to database! </p>
+<p>Connected to database! Let's define some Schemas for our Models with Mongoose.</p>
 <h1><a class="header" href="#models" id="models">Models</a></h1>
 <p>A User, to us, might need properties such as:</p>
 <ul>
@@ -684,6 +689,62 @@ Connected to database
 </ul>
 </li>
 </ul>
+<h2><a class="header" href="#schemas--models" id="schemas--models">Schemas &amp; Models</a></h2>
+<p>We will build the location Point schema first, following the guide from <a href="https://mongoosejs.com/docs/geojson.html">Mongoose geoJSON docs</a>. Create a file called <code>models.js</code>:</p>
+<pre><code class="language-js">const mongoose = require('mongoose');
+const { Schema } = mongoose;
+
+const pointSchema = new mongoose.Schema({
+  type: {
+    type: String,
+    enum: ['Point'],
+    required: true
+  },
+  coordinates: {
+    // longitude, latitude
+    type: [Number],
+    required: true
+  },
+});
+</code></pre>
+<p>We could now use this Point as a nested doc in any other Schema, however we just need it for our CoffeeShop.</p>
+<blockquote>
+<p>Note that longitude comes before latitude in the coordinate array.</p>
+</blockquote>
+<p>Our CoffeeShop Schema and Model can be defined like so:</p>
+<pre><code class="language-js">const coffeeShopSchema = new Schema({
+  name: String,
+  location: {
+    type: pointSchema,
+    required: true
+  }
+}, { timestamps: true });
+
+const CoffeeShop = mongoose.model('CoffeeShop', coffeeShopSchema);
+</code></pre>
+<p>The <code>{ timestamps: true }</code> config object tells Mongoose to automatically add <code>createdAt</code> and <code>updatedAt</code> timestamps to our Model.</p>
+<p>Now we can build our User Schema and Model:</p>
+<pre><code class="language-js">const userSchema = new Schema({
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  favorites: [{
+    type: Schema.Types.ObjectId,
+    ref: 'CoffeeShop',
+  }],
+}, { timestamps: true });
+
+const User = mongoose.model('User', userSchema);
+</code></pre>
+<p>And finally export both Models:</p>
+<pre><code class="language-js">module.exports = { CoffeeShop, User };
+</code></pre>
 <h1><a class="header" href="#routing" id="routing">Routing</a></h1>
 <p>From our design section, our User routes will look like so:</p>
 <table><thead><tr><th>Operation</th><th>Request Method</th><th>Request Body</th><th>Request Path</th><th>Response Status</th><th>Response Body</th></tr></thead><tbody>
@@ -693,31 +754,38 @@ Connected to database
 <tr><td>Update User</td><td>PUT</td><td>User</td><td>/api/v1/users/:id</td><td>200</td><td>User</td></tr>
 <tr><td>Delete User</td><td>DELETE</td><td></td><td>/api/v1/users/:id</td><td>204</td><td></td></tr>
 </tbody></table>
-<p>Which we can represent using Express' DSL:</p>
-<pre><code class="language-js">const userRouter = express.Router()
-
-userRouter.get('/users', (req, res) =&gt; {
-  // get users
+<p>Which we can represent using Express' DSL.</p>
+<p>But first, let's import our User model into <code>app.js</code>:</p>
+<pre><code class="language-js">const express = require('express');
+const { User } = require('./models');
+const app = express();
+</code></pre>
+<p>Now we can add our routes for Users:</p>
+<pre><code class="language-js">app.get('/users', (req, res) =&gt; {
+  const users = await User.find({});
   res.status(200).send(users)
 })
 
-userRouter.get('/users/:id', (req, res) =&gt; {
-  // get user by id
+app.get('/users/:id', (req, res) =&gt; {
+  const id = req.params.id;
+  const user = await User.findOneById(id);
   res.status(200).send(user)
 })
 
-userRouter.post('/users', (req, res) =&gt; {
-  // create user
+app.post('/users', (req, res) =&gt; {
+  const newUser = await User.create(req.body);
   res.status(201).send(newUser)
 })
 
-userRouter.put('/users', (req, res) =&gt; {
-  // update user
+app.put('/users:id', (req, res) =&gt; {
+  const id = req.params.id;
+  const newUser = await User.findByIdAndUpdate(id, req.body);
   res.status(200).send(updatedUser)
 })
 
-userRouter.delete('/users/:id', async (req, res) =&gt; {
-  // delete user by id
+app.delete('/users/:id', async (req, res) =&gt; {
+  const id = req.params.id;
+  await User.findByIdAndRemove(id);
   res.status(204).send()
 })
 </code></pre>

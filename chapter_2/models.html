@@ -216,6 +216,62 @@
 </ul>
 </li>
 </ul>
+<h2><a class="header" href="#schemas--models" id="schemas--models">Schemas &amp; Models</a></h2>
+<p>We will build the location Point schema first, following the guide from <a href="https://mongoosejs.com/docs/geojson.html">Mongoose geoJSON docs</a>. Create a file called <code>models.js</code>:</p>
+<pre><code class="language-js">const mongoose = require('mongoose');
+const { Schema } = mongoose;
+
+const pointSchema = new mongoose.Schema({
+  type: {
+    type: String,
+    enum: ['Point'],
+    required: true
+  },
+  coordinates: {
+    // longitude, latitude
+    type: [Number],
+    required: true
+  },
+});
+</code></pre>
+<p>We could now use this Point as a nested doc in any other Schema, however we just need it for our CoffeeShop.</p>
+<blockquote>
+<p>Note that longitude comes before latitude in the coordinate array.</p>
+</blockquote>
+<p>Our CoffeeShop Schema and Model can be defined like so:</p>
+<pre><code class="language-js">const coffeeShopSchema = new Schema({
+  name: String,
+  location: {
+    type: pointSchema,
+    required: true
+  }
+}, { timestamps: true });
+
+const CoffeeShop = mongoose.model('CoffeeShop', coffeeShopSchema);
+</code></pre>
+<p>The <code>{ timestamps: true }</code> config object tells Mongoose to automatically add <code>createdAt</code> and <code>updatedAt</code> timestamps to our Model.</p>
+<p>Now we can build our User Schema and Model:</p>
+<pre><code class="language-js">const userSchema = new Schema({
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  favorites: [{
+    type: Schema.Types.ObjectId,
+    ref: 'CoffeeShop',
+  }],
+}, { timestamps: true });
+
+const User = mongoose.model('User', userSchema);
+</code></pre>
+<p>And finally export both Models:</p>
+<pre><code class="language-js">module.exports = { CoffeeShop, User };
+</code></pre>
 
                     </main>
 

@@ -210,13 +210,18 @@ module.exports = db
   });
 }
 </code></pre>
+<p>We need to require our db instance in our <code>index.js</code> file:</p>
+<pre><code class="language-js">const db = require('./db');
+
+db.connect('mongodb://localhost:27017/map');
+</code></pre>
 <p>Now when we start our app (<code>npm run dev</code>) we will see this:</p>
 <pre><code class="language-bash">...
 [nodemon] starting `node index.js`
 App running on port: 8080
 Connected to database
 </code></pre>
-<p>Connected to database! </p>
+<p>Connected to database! Let's define some Schemas for our Models with Mongoose.</p>
 
                     </main>
 
