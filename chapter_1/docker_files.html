@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro/intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../intro/rest_basics.html"><strong aria-hidden="true">1.1.</strong> REST Basics</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">BackEnd</li><li class="chapter-item expanded "><a href="../chapter_1/setup_api_server.html"><strong aria-hidden="true">2.</strong> Setup API Server</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/prerequisites.html"><strong aria-hidden="true">2.1.</strong> Prerequisites</a></li><li class="chapter-item expanded "><a href="../chapter_1/create_project.html"><strong aria-hidden="true">2.2.</strong> Create Project</a></li><li class="chapter-item expanded "><a href="../chapter_1/basic_express_app.html"><strong aria-hidden="true">2.3.</strong> Basic Express App</a></li><li class="chapter-item expanded "><a href="../chapter_1/docker_files.html" class="active"><strong aria-hidden="true">2.4.</strong> Create Docker Files</a></li><li class="chapter-item expanded "><a href="../chapter_1/github_repo.html"><strong aria-hidden="true">2.5.</strong> Create GitHub Repo</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/api_design.html"><strong aria-hidden="true">3.</strong> Design and Build API</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/mongo.html"><strong aria-hidden="true">3.1.</strong> Connect Mongo</a></li><li class="chapter-item expanded "><a href="../chapter_2/models.html"><strong aria-hidden="true">3.2.</strong> Models</a></li><li class="chapter-item expanded "><a href="../chapter_2/routing.html"><strong aria-hidden="true">3.3.</strong> Routing</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> Testing API</div></li><li class="chapter-item expanded affix "><li class="part-title">FrontEnd</li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> Setup React App</div></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro/intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../intro/rest_basics.html"><strong aria-hidden="true">1.1.</strong> RESTful API Basics</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">BackEnd</li><li class="chapter-item expanded "><a href="../chapter_1/setup_api_server.html"><strong aria-hidden="true">2.</strong> Setup API Server</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/prerequisites.html"><strong aria-hidden="true">2.1.</strong> Prerequisites</a></li><li class="chapter-item expanded "><a href="../chapter_1/create_project.html"><strong aria-hidden="true">2.2.</strong> Create Project</a></li><li class="chapter-item expanded "><a href="../chapter_1/basic_express_app.html"><strong aria-hidden="true">2.3.</strong> Basic Express App</a></li><li class="chapter-item expanded "><a href="../chapter_1/docker_files.html" class="active"><strong aria-hidden="true">2.4.</strong> Create Docker Files</a></li><li class="chapter-item expanded "><a href="../chapter_1/github_repo.html"><strong aria-hidden="true">2.5.</strong> Create GitHub Repo</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/api_design.html"><strong aria-hidden="true">3.</strong> Design and Build API</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/mongo.html"><strong aria-hidden="true">3.1.</strong> Connect Mongo</a></li><li class="chapter-item expanded "><a href="../chapter_2/models.html"><strong aria-hidden="true">3.2.</strong> Models</a></li><li class="chapter-item expanded "><a href="../chapter_2/routing.html"><strong aria-hidden="true">3.3.</strong> Routing</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> Testing API</div></li><li class="chapter-item expanded affix "><li class="part-title">FrontEnd</li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> Setup React App</div></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -183,12 +183,13 @@ CMD [ &quot;node&quot;, &quot;index.js&quot; ]
 <pre><code class="language-ignore">.git
 node_modules/
 </code></pre>
-<p>Edit the <code>docker-compose.yml</code> file: </p>
+<p>We are going to use a Mongo instance (v4.4) that has some Earthquake data pre-loaded.
+Edit the <code>docker-compose.yml</code> file: </p>
 <pre><code class="language-yml">version: '3.8'
 services:
   mongo:
-    image: 'mongo:latest'
-    container_name: 'mongodb'
+    image: 'duanebester/mongo-earthquakes:latest'
+    container_name: 'mongo-earthquakes'
     volumes: 
       - ./mongo-volume:/data/db
     ports:
@@ -200,11 +201,11 @@ services:
 <p>It will take a while, but your Mongo instance should come up. We can verify by running:</p>
 <pre><code class="language-bash">&gt; docker ps
 # Returns:
-# CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS       
-# 6bba9117fccc   mongo:latest   &quot;docker-entrypoint.s…&quot;   35 seconds ago   Up 34 seconds
+# CONTAINER ID   IMAGE                   
+# 6bba9117fccc   mongo-earthquakes:latest
 </code></pre>
 <p>To stop the running containers, run:</p>
-<pre><code class="language-bash">docker-compose down --remove-orphans
+<pre><code class="language-bash">docker-compose down
 </code></pre>
 <p>The nice thing about Docker Compose is that we can <em>compose</em> several services together. Say we also wanted to add a Postgres Database. We would do so by adding the following <code>postgres:</code> section below the <code>mongo:</code> section:</p>
 <pre><code class="language-yml">  mongo:
@@ -222,15 +223,15 @@ services:
 <p>Now we can run <code>docker-compose up -d</code> and <code>docker-compose down</code> to start and stop both Mongo and Postgres!</p>
 <p>The <code>up</code> command will create and start all containers in the <code>docker-compose.yml</code> file.
 Similarly, the <code>down</code> command will stop and remove all containers in the <code>docker-compose.yml</code> file.</p>
-<p>We can also run:</p>
+<p>To <em>just</em> start the Mongo container. run:</p>
 <pre><code class="language-bash">docker-compose up --no-start
 docker-compose start mongo
 </code></pre>
-<p>To <em>just</em> start the Mongo container. And then:</p>
+<p>To stop <em>just</em> the Mongo container:</p>
 <pre><code class="language-bash">docker-compose stop mongo
 </code></pre>
-<p>To stop <em>just</em> the Mongo container. Note that this doesn't remove/delete the container, just stops it from running.</p>
-<p>We aren't going to use Postgres, so you can stop call containers (<code>docker-compose down</code>) and remove the <code>postgres:</code> section from the <code>docker-compose.yml</code> file.</p>
+<p>Note that this doesn't remove/delete the container, just stops it from running.</p>
+<p>We aren't going to use Postgres, so you can stop all containers (<code>docker-compose down</code>) and remove the <code>postgres:</code> section from the <code>docker-compose.yml</code> file.</p>
 <blockquote>
 <p>Removing ununsed Docker objects...</p>
 </blockquote>

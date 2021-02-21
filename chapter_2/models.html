@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro/intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../intro/rest_basics.html"><strong aria-hidden="true">1.1.</strong> REST Basics</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">BackEnd</li><li class="chapter-item expanded "><a href="../chapter_1/setup_api_server.html"><strong aria-hidden="true">2.</strong> Setup API Server</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/prerequisites.html"><strong aria-hidden="true">2.1.</strong> Prerequisites</a></li><li class="chapter-item expanded "><a href="../chapter_1/create_project.html"><strong aria-hidden="true">2.2.</strong> Create Project</a></li><li class="chapter-item expanded "><a href="../chapter_1/basic_express_app.html"><strong aria-hidden="true">2.3.</strong> Basic Express App</a></li><li class="chapter-item expanded "><a href="../chapter_1/docker_files.html"><strong aria-hidden="true">2.4.</strong> Create Docker Files</a></li><li class="chapter-item expanded "><a href="../chapter_1/github_repo.html"><strong aria-hidden="true">2.5.</strong> Create GitHub Repo</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/api_design.html"><strong aria-hidden="true">3.</strong> Design and Build API</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/mongo.html"><strong aria-hidden="true">3.1.</strong> Connect Mongo</a></li><li class="chapter-item expanded "><a href="../chapter_2/models.html" class="active"><strong aria-hidden="true">3.2.</strong> Models</a></li><li class="chapter-item expanded "><a href="../chapter_2/routing.html"><strong aria-hidden="true">3.3.</strong> Routing</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> Testing API</div></li><li class="chapter-item expanded affix "><li class="part-title">FrontEnd</li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> Setup React App</div></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro/intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../intro/rest_basics.html"><strong aria-hidden="true">1.1.</strong> RESTful API Basics</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">BackEnd</li><li class="chapter-item expanded "><a href="../chapter_1/setup_api_server.html"><strong aria-hidden="true">2.</strong> Setup API Server</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/prerequisites.html"><strong aria-hidden="true">2.1.</strong> Prerequisites</a></li><li class="chapter-item expanded "><a href="../chapter_1/create_project.html"><strong aria-hidden="true">2.2.</strong> Create Project</a></li><li class="chapter-item expanded "><a href="../chapter_1/basic_express_app.html"><strong aria-hidden="true">2.3.</strong> Basic Express App</a></li><li class="chapter-item expanded "><a href="../chapter_1/docker_files.html"><strong aria-hidden="true">2.4.</strong> Create Docker Files</a></li><li class="chapter-item expanded "><a href="../chapter_1/github_repo.html"><strong aria-hidden="true">2.5.</strong> Create GitHub Repo</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/api_design.html"><strong aria-hidden="true">3.</strong> Design and Build API</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/mongo.html"><strong aria-hidden="true">3.1.</strong> Connect Mongo</a></li><li class="chapter-item expanded "><a href="../chapter_2/models.html" class="active"><strong aria-hidden="true">3.2.</strong> Models</a></li><li class="chapter-item expanded "><a href="../chapter_2/routing.html"><strong aria-hidden="true">3.3.</strong> Routing</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">4.</strong> Testing API</div></li><li class="chapter-item expanded affix "><li class="part-title">FrontEnd</li><li class="chapter-item expanded "><div><strong aria-hidden="true">5.</strong> Setup React App</div></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -201,14 +201,14 @@
 <li>ID</li>
 <li>Email</li>
 <li>Password</li>
-<li>Date Created</li>
-<li>Favorites (list of Coffee Shops)</li>
+<li>Favorites (list of Earthquakes)</li>
 </ul>
-<h3><a class="header" href="#coffeeshop" id="coffeeshop">CoffeeShop</a></h3>
+<h3><a class="header" href="#earthquake" id="earthquake">Earthquake</a></h3>
 <ul>
 <li>ID</li>
-<li>Name</li>
-<li>Date Created</li>
+<li>Year</li>
+<li>Area</li>
+<li>Scale</li>
 <li>Location
 <ul>
 <li>Latitude</li>
@@ -217,39 +217,36 @@
 </li>
 </ul>
 <h2><a class="header" href="#schemas--models" id="schemas--models">Schemas &amp; Models</a></h2>
-<p>We will build the location Point schema first, following the guide from <a href="https://mongoosejs.com/docs/geojson.html">Mongoose geoJSON docs</a>. Create a file called <code>models.js</code>:</p>
+<p>We will build the Earthquake schema first, following the guide from <a href="https://mongoosejs.com/docs/geojson.html">Mongoose geoJSON docs</a>. Create a file called <code>models.js</code>:</p>
 <pre><code class="language-js">const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const pointSchema = new mongoose.Schema({
-  type: {
-    type: String,
-    enum: ['Point'],
-    required: true
-  },
-  coordinates: {
-    // longitude, latitude
-    type: [Number],
-    required: true
-  },
+const earthquakeSchema = new Schema({
+  source: String,
+  year: Number,
+  area: String,
+  scale: Number,
+  location: {
+    _id: false,
+    type: {
+      type: String,
+      enum: ['Point'],
+      required: true
+    },
+    coordinates: {
+      // longitude, latitude
+      type: [Number],
+      required: true
+    }
+  }
 });
 </code></pre>
-<p>We could now use this Point as a nested doc in any other Schema, however we just need it for our CoffeeShop.</p>
 <blockquote>
 <p>Note that longitude comes before latitude in the coordinate array.</p>
 </blockquote>
-<p>Our CoffeeShop Schema and Model can be defined like so:</p>
-<pre><code class="language-js">const coffeeShopSchema = new Schema({
-  name: String,
-  location: {
-    type: pointSchema,
-    required: true
-  }
-}, { timestamps: true });
-
-const CoffeeShop = mongoose.model('CoffeeShop', coffeeShopSchema);
+<p>Our Earthquake Model can be defined like so:</p>
+<pre><code class="language-js">const Earthquake = mongoose.model('Earthquake', earthquakeSchema, 'earthquakes');
 </code></pre>
-<p>The <code>{ timestamps: true }</code> config object tells Mongoose to automatically add <code>createdAt</code> and <code>updatedAt</code> timestamps to our Model.</p>
 <p>Now we can build our User Schema and Model:</p>
 <pre><code class="language-js">const userSchema = new Schema({
   email: {
@@ -263,14 +260,17 @@ const CoffeeShop = mongoose.model('CoffeeShop', coffeeShopSchema);
   },
   favorites: [{
     type: Schema.Types.ObjectId,
-    ref: 'CoffeeShop',
+    ref: 'Earthquake',
   }],
 }, { timestamps: true });
 
 const User = mongoose.model('User', userSchema);
 </code></pre>
+<blockquote>
+<p>Note: The <code>{ timestamps: true }</code> config object tells Mongoose to automatically add <code>createdAt</code> and <code>updatedAt</code> timestamps to our Model.</p>
+</blockquote>
 <p>And finally export both Models:</p>
-<pre><code class="language-js">module.exports = { CoffeeShop, User };
+<pre><code class="language-js">module.exports = { User, Earthquake };
 </code></pre>
 
                     </main>
