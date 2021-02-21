@@ -3,7 +3,7 @@
 
 - [Introduction](./intro/intro.md)
     - [RESTful API Basics](./intro/rest_basics.md)
-# BackEnd
+# Backend
 - [Setup API Server](./chapter_1/setup_api_server.md)
     - [Prerequisites](./chapter_1/prerequisites.md)
     - [Create Project](./chapter_1/create_project.md)
@@ -15,5 +15,5 @@
     - [Models](./chapter_2/models.md)
     - [Routing](./chapter_2/routing.md)
 - [Testing API]()
-# FrontEnd
+# Frontend
 - [Setup React App]()
