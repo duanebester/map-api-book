@@ -281,28 +281,28 @@ console.log(math.multiply(2,3)) // 6
 <blockquote>
 <p>Note that we don't need to send any info in the Body to retrieve users.</p>
 </blockquote>
-<pre><code class="language-ts">Request {
+<pre><code class="language-ts">GetUsersRequest {
     Path: &quot;/api/users&quot;
     Body: {}
     Method: &quot;GET&quot;
 }
 </code></pre>
 <p>And if we wanted to create a new user:</p>
-<pre><code class="language-ts">Request {
+<pre><code class="language-ts">AddUserRequest {
     Path: &quot;/api/users&quot;
     Body: { name: &quot;John&quot;, age: 30 }
     Method: &quot;POST&quot;
 }
 </code></pre>
 <p>And if we wanted to update the user's age (we need the ID of the user in the Path):</p>
-<pre><code class="language-ts">Request {
+<pre><code class="language-ts">UpdateUserRequest {
     Path: `/api/users/&lt;user-id&gt;`
     Body: { name: &quot;John&quot;, age: 31 }
     Method: &quot;PUT&quot;
 }
 </code></pre>
 <p>And if we wanted to delete the user (we need the ID of the user in the Path):</p>
-<pre><code class="language-ts">Request {
+<pre><code class="language-ts">DeleteUserRequest {
     Path: `/api/users/&lt;user-id&gt;`
     Body: {}
     Method: &quot;DELETE&quot;
