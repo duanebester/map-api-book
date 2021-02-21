@@ -176,33 +176,60 @@
 <li>Path</li>
 <li>Body</li>
 </ul>
-<p>An Http Request Method is usually one of the following; <code>GET</code>, <code>PUT</code>, <code>POST</code>, <code>DELETE</code>. (There are many others, but these are the most common).</p>
-<p>The Http Request Path is the URL endpoint. If we had a URL such as <code>Http://google.com/api/users</code> the path would be <code>/api/users</code>.</p>
+<p>Request Headers are important for Http, frameworks, and Auth. However, for basic RESTful model design, we won't worry about them.</p>
+<pre><code class="language-ts">Request {
+    Path: String
+    Body: String | Object
+    Method: String
+    Headers: Object
+}
+</code></pre>
+<p>The Http Request Path is the URL endpoint. If we had a URL such as <code>https://my-website.com/api/users</code> the path would be <code>/api/users</code>.</p>
+<pre><code class="language-ts">Request {
+    Path: &quot;/api/users&quot;
+}
+</code></pre>
 <p>The Body of an Http Request the the data the Request contains. For our purposes, this will be a JSON document with info we want to send to our service.</p>
+<pre><code class="language-ts">Request {
+    Body: { name: &quot;John&quot;, age: 30 }
+}
+</code></pre>
+<p>An Http Request Method is usually one of the following; <code>GET</code>, <code>PUT</code>, <code>POST</code>, <code>DELETE</code>. (There are many others, but these are the most common).</p>
+<pre><code class="language-ts">Request {
+    Method: &quot;POST&quot;
+}
+</code></pre>
 <p>With the above three attributes, we can build a RESTful service for a User resource (often called a Model). The most common, and usually the default way to represent state transfer for a model is called &quot;CRUD&quot; which stands for Create, Read, Update, and Delete. This makes sense as if we have a User model, we would likely want to create users, retrieve users, update them, and perhaps delete them.</p>
-<p>We define RESTful with the above three attributes combined. </p>
-<p>Say we want to get all the users from our service, we'd send an Http Request with the attributes like so:</p>
+<p>Say we want to <strong>get</strong> the <strong>users</strong> from our service, we'd send an Http Request with the method set to <strong>GET</strong> and the path set to <strong>/api/users</strong>:</p>
 <blockquote>
 <p>Note that we don't need to send any info in the Body to retrieve users.</p>
 </blockquote>
-<pre><code>Method: `GET`
-Path:   `/api/users`
-Body:   `null`
+<pre><code class="language-ts">Request {
+    Path: &quot;/api/users&quot;
+    Body: {}
+    Method: &quot;GET&quot;
+}
 </code></pre>
 <p>And if we wanted to create a new user:</p>
-<pre><code>Method: `POST`
-Path:   `/api/users`
-Body:   `{&quot;name&quot;:&quot;Duane&quot;, &quot;age&quot;:32}`
+<pre><code class="language-ts">Request {
+    Path: &quot;/api/users&quot;
+    Body: { name: &quot;John&quot;, age: 30 }
+    Method: &quot;POST&quot;
+}
 </code></pre>
 <p>And if we wanted to update the user's age (we need the ID of the user in the Path):</p>
-<pre><code>Method: `PUT`
-Path:   `/api/users/&lt;user-id&gt;`
-Body:   `{&quot;name&quot;:&quot;Duane&quot;, &quot;age&quot;:33}`
+<pre><code class="language-ts">Request {
+    Path: `/api/users/&lt;user-id&gt;`
+    Body: { name: &quot;John&quot;, age: 31 }
+    Method: &quot;PUT&quot;
+}
 </code></pre>
 <p>And if we wanted to delete the user (we need the ID of the user in the Path):</p>
-<pre><code>Method: `DELETE`
-Path:   `/api/users/&lt;user-id&gt;`
-Body:   `null`
+<pre><code class="language-ts">Request {
+    Path: `/api/users/&lt;user-id&gt;`
+    Body: {}
+    Method: &quot;DELETE&quot;
+}
 </code></pre>
 
                     </main>
