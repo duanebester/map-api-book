@@ -167,7 +167,46 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#rest-basics" id="rest-basics">REST Basics</a></h1>
+                        <h1><a class="header" href="#restful-api-basics" id="restful-api-basics">RESTful API Basics</a></h1>
+<h3><a class="header" href="#api" id="api">API</a></h3>
+<p>To understand what a RESTful API is, we should know what an API is.</p>
+<p>&quot;API&quot; stands for &quot;Application programming interface&quot; and is &quot;a computing interface that defines interactions between multiple software intermediaries. It defines the kinds of calls or requests that can be made, how to make them, the data formats that should be used, the conventions to follow&quot; - Wikipedia</p>
+<p>We can think of an API almost as a set of rules and conditions that we expect software to adhere to. There is no magic to this-- we can define an API any way we like. Let's define a simple one:</p>
+<p>Our API (v1.0)</p>
+<ul>
+<li>You give me any number, and I'll return that number.</li>
+<li>You give me any two numbers, and I'll give you their product.</li>
+</ul>
+<p>That's all it takes! The above is a totally legit API. Just a list of bullet points.</p>
+<p>An API is just a way to define a set of rules. It was invented to allow software developers to modularize their code. You could take the above API defintion, hand it to any software developer, and they can write the code that adheres to the rules.</p>
+<p>E.g.</p>
+<pre><code>Enter x, y:
+    If y DoesNotExist
+        Set y = 1
+
+    Return x * y
+</code></pre>
+<p>We can also extend an API. Let's extend our simple one:</p>
+<p>Our API (v1.1)</p>
+<ul>
+<li>You give me any number, and I'll return that number.</li>
+<li>You give me any two numbers, and I'll give you their product.</li>
+<li>Can only enter numbers, anything else returns an error message.</li>
+</ul>
+<p>E.g.</p>
+<pre><code>Enter x, y:
+    If x != Number
+        Return Error
+    If y DoesNotExist
+        Set y = 1
+    If y != Number
+        Return Error
+
+    Return x * y
+</code></pre>
+<p>The nice thing about this is you could define multiple API specifications and then stitch them all together. Our API, for example, can be the bridge between two software developers. Bob writes a code that needs a function adhering to our API definition about, and Jim can write the code for our API definition. Modularization.</p>
+<p>A RESTful APIs is the bridge between the &quot;Frontend&quot; and &quot;Backend&quot; code that is needed to build a web application. Backend code is usually the server that connects to a database and performs business logic on said data before sending it to a Frontend. The Frontend is usually an application that runs in the browser that makes the business logic and data make sense to users. It also handles user input and interactions. </p>
+<h3><a class="header" href="#rest" id="rest">REST</a></h3>
 <p>&quot;REST&quot; stands for &quot;Representational state transfer&quot; and a RESTful Web service is required to provide an application access to its Web resources in a textual representation. - Wikipedia</p>
 <p>This interpretation doesn't win awards for being clear. A RESTful API could <em>be many things,</em> but the community has largely accepted that composing Http endpoints in a certain manner constitutes as RESTful.</p>
 <p>For us, to build a RESTful API we need to focus on three attributes of an Http Request:</p>
@@ -231,6 +270,7 @@
     Method: &quot;DELETE&quot;
 }
 </code></pre>
+<p>With the above RESTful API defined, the frontend developers can build an application that queries for users. Similarly, the backend developers can build their code to serve up users and ways to modify users. Once both sides have completed their code, the whole system works together.</p>
 
                     </main>
 
