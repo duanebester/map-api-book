@@ -147,7 +147,7 @@ Say we want to **get** the **users** from our service, we'd send an Http Request
 
 > Note that we don't need to send any info in the Body to retrieve users.
 ```ts
-Request {
+GetUsersRequest {
     Path: "/api/users"
     Body: {}
     Method: "GET"
@@ -156,7 +156,7 @@ Request {
 
 And if we wanted to create a new user:
 ```ts
-Request {
+AddUserRequest {
     Path: "/api/users"
     Body: { name: "John", age: 30 }
     Method: "POST"
@@ -165,7 +165,7 @@ Request {
 
 And if we wanted to update the user's age (we need the ID of the user in the Path):
 ```ts
-Request {
+UpdateUserRequest {
     Path: `/api/users/<user-id>`
     Body: { name: "John", age: 31 }
     Method: "PUT"
@@ -174,7 +174,7 @@ Request {
 
 And if we wanted to delete the user (we need the ID of the user in the Path):
 ```ts
-Request {
+DeleteUserRequest {
     Path: `/api/users/<user-id>`
     Body: {}
     Method: "DELETE"
