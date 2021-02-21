@@ -5,9 +5,9 @@ const transformed = geo.features.map(function(feature) {
     const obj = { }
     obj.location = feature.geometry
     obj.source = feature.properties['Source']
-    obj.year = feature.properties['Year']
+    obj.year = parseInt(feature.properties['Year'])
     obj.area = feature.properties['Area']
-    obj.scale = feature.properties['M']
+    obj.scale = parseFloat(feature.properties['M'])
     return obj
 })
 

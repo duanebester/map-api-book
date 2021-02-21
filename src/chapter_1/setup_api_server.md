@@ -1,6 +1,6 @@
 # Setup API Server
 
-For our Map project, we need a robust and easy to use API Server. Luckily [Express.js](https://expressjs.com/) fits these requirements and is a nice API framework to use. _"Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications."_
+For our Map project, we need a robust and easy to use API Server. Luckily [Express.js](https://expressjs.com/) fits these requirements and has a nice DSL to work with. _"Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications."_
 
 > Why not Koa?
 

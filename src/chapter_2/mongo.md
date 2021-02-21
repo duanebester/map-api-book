@@ -54,11 +54,15 @@ const db = require('./db');
 db.connect('mongodb://localhost:27017/map');
 ```
 
-Now when we start our app (`npm run dev`) we will see this:
+Now when we start our app (`npm run start`) we will see this:
 ```bash
 ...
 [nodemon] starting `node index.js`
 App running on port: 8080
 Connected to database
 ```
-Connected to database! Let's define some Schemas for our Models with Mongoose.
+Connected to database! 
+
+> Note: Don't worry about any warnings for now.
+
+Let's define some Schemas for our Models with Mongoose!

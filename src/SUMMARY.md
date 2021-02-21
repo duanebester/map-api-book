@@ -2,7 +2,7 @@
 
 
 - [Introduction](./intro/intro.md)
-    - [REST Basics](./intro/rest_basics.md)
+    - [RESTful API Basics](./intro/rest_basics.md)
 # BackEnd
 - [Setup API Server](./chapter_1/setup_api_server.md)
     - [Prerequisites](./chapter_1/prerequisites.md)

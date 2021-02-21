@@ -12,8 +12,6 @@
 * Create a [GitHub](https://github.com/) Account
 * Create a [DigitalOcean](https://digitalocean.com/) Account
 * Create a [Mapbox](https://account.mapbox.com/) Account
-* Optional - Create a Google Cloud Account
-* Optional - Create an AWS Account
 
 ### Verifying Installs
 

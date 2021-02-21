@@ -19,13 +19,14 @@ Edit the `.dockerignore` file:
 node_modules/
 ```
 
+We are going to use a Mongo instance (v4.4) that has some Earthquake data pre-loaded.
 Edit the `docker-compose.yml` file: 
 ```yml
 version: '3.8'
 services:
   mongo:
-    image: 'mongo:latest'
-    container_name: 'mongodb'
+    image: 'duanebester/mongo-earthquakes:latest'
+    container_name: 'mongo-earthquakes'
     volumes: 
       - ./mongo-volume:/data/db
     ports:
@@ -41,13 +42,13 @@ It will take a while, but your Mongo instance should come up. We can verify by r
 ```bash
 > docker ps
 # Returns:
-# CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS       
-# 6bba9117fccc   mongo:latest   "docker-entrypoint.s…"   35 seconds ago   Up 34 seconds
+# CONTAINER ID   IMAGE                   
+# 6bba9117fccc   mongo-earthquakes:latest
 ```
 
 To stop the running containers, run:
 ```bash
-docker-compose down --remove-orphans
+docker-compose down
 ```
 
 The nice thing about Docker Compose is that we can _compose_ several services together. Say we also wanted to add a Postgres Database. We would do so by adding the following `postgres:` section below the `mongo:` section:
@@ -70,22 +71,22 @@ Now we can run `docker-compose up -d` and `docker-compose down` to start and sto
 The `up` command will create and start all containers in the `docker-compose.yml` file.
 Similarly, the `down` command will stop and remove all containers in the `docker-compose.yml` file.
 
-We can also run:
+To _just_ start the Mongo container. run:
 
 ```bash
 docker-compose up --no-start
 docker-compose start mongo
 ```
 
-To _just_ start the Mongo container. And then:
+To stop _just_ the Mongo container:
 
 ```bash
 docker-compose stop mongo
 ```
 
-To stop _just_ the Mongo container. Note that this doesn't remove/delete the container, just stops it from running.
+Note that this doesn't remove/delete the container, just stops it from running.
 
-We aren't going to use Postgres, so you can stop call containers (`docker-compose down`) and remove the `postgres:` section from the `docker-compose.yml` file.
+We aren't going to use Postgres, so you can stop all containers (`docker-compose down`) and remove the `postgres:` section from the `docker-compose.yml` file.
 
 > Removing ununsed Docker objects...
 

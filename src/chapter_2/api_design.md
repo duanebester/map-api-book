@@ -4,7 +4,7 @@ One of the biggest problems with software today is that people do not spend enou
 
 Why Mongo?
 
-Mongo is a NoSQL database, which mostly means it is more freeform and offers us some flexibility in the prototyping phase. It also has a nice way to query and aggregate with GPS coordinates. Mongo documents are essentially JSON documents, so Mongo works well with JavaScript based applications. My advice for a real world application with limits on design time: If you don't know how your data will be structured and connected, prototype with a NoSQL database such as Mongo. If you have well-defined models with structured relationships, then go with a SQL database like Postgres. 
+Mongo is a NoSQL database, which mostly means it is more freeform and offers us some flexibility in the prototyping phase. It also has a nice way to query and aggregate with GPS coordinates. Mongo documents are essentially JSON documents, so Mongo works well with JavaScript based applications. 
 
 So right now our system might be something like this:
 
