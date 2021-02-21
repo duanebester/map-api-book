@@ -1,4 +1,55 @@
-# REST Basics
+# RESTful API Basics
+
+### API
+
+To understand what a RESTful API is, we should know what an API is.
+
+"API" stands for "Application programming interface" and is "a computing interface that defines interactions between multiple software intermediaries. It defines the kinds of calls or requests that can be made, how to make them, the data formats that should be used, the conventions to follow" - Wikipedia
+
+We can think of an API almost as a set of rules and conditions that we expect software to adhere to. There is no magic to this-- we can define an API any way we like. Let's define a simple one:
+
+Our API (v1.0)
+* You give me any number, and I'll return that number.
+* You give me any two numbers, and I'll give you their product.
+
+That's all it takes! The above is a totally legit API. Just a list of bullet points.
+
+An API is just a way to define a set of rules. It was invented to allow software developers to modularize their code. You could take the above API defintion, hand it to any software developer, and they can write the code that adheres to the rules.
+
+E.g.
+```
+Enter x, y:
+    If y DoesNotExist
+        Set y = 1
+
+    Return x * y
+```
+
+We can also extend an API. Let's extend our simple one:
+
+Our API (v1.1)
+* You give me any number, and I'll return that number.
+* You give me any two numbers, and I'll give you their product.
+* Can only enter numbers, anything else returns an error message.
+
+E.g.
+```
+Enter x, y:
+    If x != Number
+        Return Error
+    If y DoesNotExist
+        Set y = 1
+    If y != Number
+        Return Error
+
+    Return x * y
+```
+
+The nice thing about this is you could define multiple API specifications and then stitch them all together. Our API, for example, can be the bridge between two software developers. Bob writes a code that needs a function adhering to our API definition about, and Jim can write the code for our API definition. Modularization.
+
+A RESTful APIs is the bridge between the "Frontend" and "Backend" code that is needed to build a web application. Backend code is usually the server that connects to a database and performs business logic on said data before sending it to a Frontend. The Frontend is usually an application that runs in the browser that makes the business logic and data make sense to users. It also handles user input and interactions. 
+
+### REST
 
 "REST" stands for "Representational state transfer" and a RESTful Web service is required to provide an application access to its Web resources in a textual representation. - Wikipedia
 
@@ -80,3 +131,6 @@ Request {
     Body: {}
     Method: "DELETE"
 }
+```
+
+With the above RESTful API defined, the frontend developers can build an application that queries for users. Similarly, the backend developers can build their code to serve up users and ways to modify users. Once both sides have completed their code, the whole system works together.
