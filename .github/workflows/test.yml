@@ -10,13 +10,18 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repo
       - uses: actions/checkout@v2
 
       - name: Setup mdBook
         uses: peaceiris/actions-mdbook@v1
         with:
           mdbook-version: '0.4.6'
-          # mdbook-version: 'latest'
       
       - name: Test mdBook
         run: mdbook test
+        
+      - name: Install aspell
+        run: apt install aspell -y
+      - name: Run spellchecker
+        run: ./ci/spellchecker.sh
