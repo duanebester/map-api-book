@@ -2,13 +2,13 @@
 
 ### API
 
-To understand what a RESTful API is, we should know what an API is.
+To understand what a RESTful API is, we need to understand what an API is.
 
-"API" stands for "Application programming interface" and is "a computing interface that defines interactions between multiple software intermediaries. It defines the kinds of calls or requests that can be made, how to make them, the data formats that should be used, the conventions to follow" - Wikipedia
+API stands for "**A**pplication **P**rogramming **I**nterface" and is "a computing interface that defines interactions between multiple software intermediaries. It defines the kinds of calls or requests that can be made, how to make them, the data formats that should be used, the conventions to follow" - Wikipedia.
 
 We can think of an API almost as a set of rules and conditions that we expect software to adhere to. There is no magic to this-- we can define an API any way we like. Let's define a simple one:
 
-Our API (v1.0)
+Our API (version 1.0):
 * You give me any number, and I'll return that number.
 * You give me any two numbers, and I'll give you their product.
 
@@ -18,44 +18,92 @@ An API is just a way to define a set of rules. It was invented to allow software
 
 E.g.
 ```
-Enter x, y:
-    If y DoesNotExist
+Input x, y:
+    If y is Undefined
         Set y = 1
 
-    Return x * y
+    Return (x * y)
 ```
 
-We can also extend an API. Let's extend our simple one:
+But this API isn't fool-proof... What happens if we were given something other than numbers? We can totally add or multiply `'a'` and `'b'`, but it might not be what you expect. For example, in JavaScript:
+```js
+console.log('a' + 'b');
+// Returns 'ab'
+console.log('a' * 'b');
+// Returns NaN (Not A Number)
+```
 
-Our API (v1.1)
+Luckily we can extend an API. Let's say version 1.0 is deprecated and everyone must use our newly extended API:
+
+Our API (version 2.0):
 * You give me any number, and I'll return that number.
 * You give me any two numbers, and I'll give you their product.
-* Can only enter numbers, anything else returns an error message.
+* Can only enter numbers, entering anything else returns an error message.
 
 E.g.
 ```
-Enter x, y:
-    If x != Number
+Input x, y:
+    If x is Undefined
         Return Error
-    If y DoesNotExist
+
+    If x isNot Number
+        Return Error
+
+    If y is Undefined
         Set y = 1
-    If y != Number
+
+    If y isNot Number
         Return Error
 
     Return x * y
 ```
 
-The nice thing about this is you could define multiple API specifications and then stitch them all together. Our API, for example, can be the bridge between two software developers. Bob writes a code that needs a function adhering to our API definition about, and Jim can write the code for our API definition. Modularization.
+The nice thing about this is you could define multiple API specifications and then stitch them all together. An API, for example, can be the bridge between two software developers. Bob is writing some code for a Math library and needs a function for multiplication. Jim has some free time and can write the multiplication code. Bob and Jim agree on an API, such that as long as Jim's code meets the API definition, we can combine the two pieces of code together when they have both finished. Modularization.
 
-A RESTful APIs is the bridge between the "Frontend" and "Backend" code that is needed to build a web application. Backend code is usually the server that connects to a database and performs business logic on said data before sending it to a Frontend. The Frontend is usually an application that runs in the browser that makes the business logic and data make sense to users. It also handles user input and interactions. 
+Our list of bulletpoints totally works, but code is much more succint, and can be Type checked. In TypeScript, Bob can define the interface as a function. Same as our bulletpoints, the function takes a number and a second optional number. It then returns a number. He can then continue on his day writing other code that would call this function:
+```ts
+interface IMath {
+    multiply: (x:Number, y?:Number) => Number
+}
+```
+
+Jim would then write the implementation. Same as the bulletpoint logic; If the type of the first input isn't a number, return an error. If the type of the second input isn't defined, we set it to `1`. If the second input was defined, but it's not a number, return an error. Otherwise if all is good, return the multiplication of the two inputs:
+```ts
+var math:IMath = {
+    multiply: (x:Number, y?:Number) => {
+        if(typeof x !== 'number') throw new Error()
+        if(typeof y === 'undefined') y = 1
+        if(typeof y !== 'number') throw new Error()
+        return x * y
+    }
+}
+```
+
+Bob could then use Jim's implementation in his code:
+```ts
+console.log(math.multiply(2))   // 2
+console.log(math.multiply(2,3)) // 6
+```
+
+Voilà, we are interface masters. just created a simple interface and the implementation of that interface... Remember that API stands for Application Programming **Interface**? This basically means that a whole _Application_ has an _Interface_.
+
+So a better example of an _API_ versus _just the I_ might look more like this:
+```ts
+interface IMath {
+    add: (x:Number, y?:Number) => Number
+    subtract: (x:Number, y?:Number) => Number
+    multiply: (x:Number, y?:Number) => Number
+    divide: (x:Number, y?:Number) => Number
+}
+```
 
 ### REST
 
-"REST" stands for "Representational state transfer" and a RESTful Web service is required to provide an application access to its Web resources in a textual representation. - Wikipedia
+REST stands for "**RE**presentational **S**tate **T**ransfer" and a RESTful Web service is required to provide an application access to its Web resources in a textual representation. - Wikipedia
 
-This interpretation doesn't win awards for being clear. A RESTful API could _be many things,_ but the community has largely accepted that composing Http endpoints in a certain manner constitutes as RESTful.
+This interpretation doesn't win awards for being clear. A RESTful API _could be many things,_ but the community has largely accepted that sending Http Requests and Responses in a certain manner constitutes as RESTful. A RESTful API is the bridge between the "Frontend" and "Backend" code that is needed to build a web application. They communicate via the API. Backend code is usually the server that connects to a database and performs business logic on said data before sending it to a Frontend. The Frontend is usually an application that runs in the browser that makes the business logic and data make sense to users. The Frontend also handles user input and interactions. Why split the two? Again, for modularization. The two areas have become complex enough that they require more expertise. Thus web applications are largely split.
 
-For us, to build a RESTful API we need to focus on three attributes of an Http Request:
+For us to build a RESTful API we need to focus on three attributes of an Http Request:
 
 * Method
 * Path
@@ -79,7 +127,7 @@ Request {
 }
 ```
 
-The Body of an Http Request the the data the Request contains. For our purposes, this will be a JSON document with info we want to send to our service.
+The Body of an Http Request is the data the Request contains. For our purposes, this will be a JSON document with info we want to send to our service.
 ```ts
 Request {
     Body: { name: "John", age: 30 }
