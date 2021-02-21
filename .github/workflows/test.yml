@@ -20,8 +20,3 @@ jobs:
       
       - name: Test mdBook
         run: mdbook test
-        
-      - name: Install aspell
-        run: apt install aspell -y
-      - name: Run spellchecker
-        run: ./ci/spellchecker.sh
