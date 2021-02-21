@@ -169,10 +169,10 @@
                     <main>
                         <h1><a class="header" href="#restful-api-basics" id="restful-api-basics">RESTful API Basics</a></h1>
 <h3><a class="header" href="#api" id="api">API</a></h3>
-<p>To understand what a RESTful API is, we should know what an API is.</p>
-<p>&quot;API&quot; stands for &quot;Application programming interface&quot; and is &quot;a computing interface that defines interactions between multiple software intermediaries. It defines the kinds of calls or requests that can be made, how to make them, the data formats that should be used, the conventions to follow&quot; - Wikipedia</p>
+<p>To understand what a RESTful API is, we need to understand what an API is.</p>
+<p>API stands for &quot;<strong>A</strong>pplication <strong>P</strong>rogramming <strong>I</strong>nterface&quot; and is &quot;a computing interface that defines interactions between multiple software intermediaries. It defines the kinds of calls or requests that can be made, how to make them, the data formats that should be used, the conventions to follow&quot; - Wikipedia.</p>
 <p>We can think of an API almost as a set of rules and conditions that we expect software to adhere to. There is no magic to this-- we can define an API any way we like. Let's define a simple one:</p>
-<p>Our API (v1.0)</p>
+<p>Our API (version 1.0):</p>
 <ul>
 <li>You give me any number, and I'll return that number.</li>
 <li>You give me any two numbers, and I'll give you their product.</li>
@@ -180,36 +180,74 @@
 <p>That's all it takes! The above is a totally legit API. Just a list of bullet points.</p>
 <p>An API is just a way to define a set of rules. It was invented to allow software developers to modularize their code. You could take the above API defintion, hand it to any software developer, and they can write the code that adheres to the rules.</p>
 <p>E.g.</p>
-<pre><code>Enter x, y:
-    If y DoesNotExist
+<pre><code>Input x, y:
+    If y is Undefined
         Set y = 1
 
-    Return x * y
+    Return (x * y)
 </code></pre>
-<p>We can also extend an API. Let's extend our simple one:</p>
-<p>Our API (v1.1)</p>
+<p>But this API isn't fool-proof... What happens if we were given something other than numbers? We can totally add or multiply <code>'a'</code> and <code>'b'</code>, but it might not be what you expect. For example, in JavaScript:</p>
+<pre><code class="language-js">console.log('a' + 'b');
+// Returns 'ab'
+console.log('a' * 'b');
+// Returns NaN (Not A Number)
+</code></pre>
+<p>Luckily we can extend an API. Let's say version 1.0 is deprecated and everyone must use our newly extended API:</p>
+<p>Our API (version 2.0):</p>
 <ul>
 <li>You give me any number, and I'll return that number.</li>
 <li>You give me any two numbers, and I'll give you their product.</li>
-<li>Can only enter numbers, anything else returns an error message.</li>
+<li>Can only enter numbers, entering anything else returns an error message.</li>
 </ul>
 <p>E.g.</p>
-<pre><code>Enter x, y:
-    If x != Number
+<pre><code>Input x, y:
+    If x is Undefined
         Return Error
-    If y DoesNotExist
+
+    If x isNot Number
+        Return Error
+
+    If y is Undefined
         Set y = 1
-    If y != Number
+
+    If y isNot Number
         Return Error
 
     Return x * y
 </code></pre>
-<p>The nice thing about this is you could define multiple API specifications and then stitch them all together. Our API, for example, can be the bridge between two software developers. Bob writes a code that needs a function adhering to our API definition about, and Jim can write the code for our API definition. Modularization.</p>
-<p>A RESTful APIs is the bridge between the &quot;Frontend&quot; and &quot;Backend&quot; code that is needed to build a web application. Backend code is usually the server that connects to a database and performs business logic on said data before sending it to a Frontend. The Frontend is usually an application that runs in the browser that makes the business logic and data make sense to users. It also handles user input and interactions. </p>
+<p>The nice thing about this is you could define multiple API specifications and then stitch them all together. An API, for example, can be the bridge between two software developers. Bob is writing some code for a Math library and needs a function for multiplication. Jim has some free time and can write the multiplication code. Bob and Jim agree on an API, such that as long as Jim's code meets the API definition, we can combine the two pieces of code together when they have both finished. Modularization.</p>
+<p>Our list of bulletpoints totally works, but code is much more succint, and can be Type checked. In TypeScript, Bob can define the interface as a function. Same as our bulletpoints, the function takes a number and a second optional number. It then returns a number. He can then continue on his day writing other code that would call this function:</p>
+<pre><code class="language-ts">interface IMath {
+    multiply: (x:Number, y?:Number) =&gt; Number
+}
+</code></pre>
+<p>Jim would then write the implementation. Same as the bulletpoint logic; If the type of the first input isn't a number, return an error. If the type of the second input isn't defined, we set it to <code>1</code>. If the second input was defined, but it's not a number, return an error. Otherwise if all is good, return the multiplication of the two inputs:</p>
+<pre><code class="language-ts">var math:IMath = {
+    multiply: (x:Number, y?:Number) =&gt; {
+        if(typeof x !== 'number') throw new Error()
+        if(typeof y === 'undefined') y = 1
+        if(typeof y !== 'number') throw new Error()
+        return x * y
+    }
+}
+</code></pre>
+<p>Bob could then use Jim's implementation in his code:</p>
+<pre><code class="language-ts">console.log(math.multiply(2))   // 2
+console.log(math.multiply(2,3)) // 6
+</code></pre>
+<p>Voilà, we are interface masters. just created a simple interface and the implementation of that interface... Remember that API stands for Application Programming <strong>Interface</strong>? This basically means that a whole <em>Application</em> has an <em>Interface</em>.</p>
+<p>So a better example of an <em>API</em> versus <em>just the I</em> might look more like this:</p>
+<pre><code class="language-ts">interface IMath {
+    add: (x:Number, y?:Number) =&gt; Number
+    subtract: (x:Number, y?:Number) =&gt; Number
+    multiply: (x:Number, y?:Number) =&gt; Number
+    divide: (x:Number, y?:Number) =&gt; Number
+}
+</code></pre>
 <h3><a class="header" href="#rest" id="rest">REST</a></h3>
-<p>&quot;REST&quot; stands for &quot;Representational state transfer&quot; and a RESTful Web service is required to provide an application access to its Web resources in a textual representation. - Wikipedia</p>
-<p>This interpretation doesn't win awards for being clear. A RESTful API could <em>be many things,</em> but the community has largely accepted that composing Http endpoints in a certain manner constitutes as RESTful.</p>
-<p>For us, to build a RESTful API we need to focus on three attributes of an Http Request:</p>
+<p>REST stands for &quot;<strong>RE</strong>presentational <strong>S</strong>tate <strong>T</strong>ransfer&quot; and a RESTful Web service is required to provide an application access to its Web resources in a textual representation. - Wikipedia</p>
+<p>This interpretation doesn't win awards for being clear. A RESTful API <em>could be many things,</em> but the community has largely accepted that sending Http Requests and Responses in a certain manner constitutes as RESTful. A RESTful API is the bridge between the &quot;Frontend&quot; and &quot;Backend&quot; code that is needed to build a web application. They communicate via the API. Backend code is usually the server that connects to a database and performs business logic on said data before sending it to a Frontend. The Frontend is usually an application that runs in the browser that makes the business logic and data make sense to users. The Frontend also handles user input and interactions. Why split the two? Again, for modularization. The two areas have become complex enough that they require more expertise. Thus web applications are largely split.</p>
+<p>For us to build a RESTful API we need to focus on three attributes of an Http Request:</p>
 <ul>
 <li>Method</li>
 <li>Path</li>
@@ -228,7 +266,7 @@
     Path: &quot;/api/users&quot;
 }
 </code></pre>
-<p>The Body of an Http Request the the data the Request contains. For our purposes, this will be a JSON document with info we want to send to our service.</p>
+<p>The Body of an Http Request is the data the Request contains. For our purposes, this will be a JSON document with info we want to send to our service.</p>
 <pre><code class="language-ts">Request {
     Body: { name: &quot;John&quot;, age: 30 }
 }
