@@ -192,7 +192,7 @@
 <ul>
 <li>Express API Framework
 <ul>
-<li>Middleware</li>
+<li>Middle-ware</li>
 </ul>
 </li>
 <li>Testing</li>
@@ -232,7 +232,7 @@
 <li>You give me any two numbers, and I'll give you their product.</li>
 </ul>
 <p>That's all it takes! The above is a totally legit API. Just a list of bullet points.</p>
-<p>An API is just a way to define a set of rules. It was invented to allow software developers to modularize their code. You could take the above API defintion, hand it to any software developer, and they can write the code that adheres to the rules.</p>
+<p>An API is just a way to define a set of rules. It was invented to allow software developers to modularize their code. You could take the above API definition, hand it to any software developer, and they can write the code that adheres to the rules.</p>
 <p>E.g.</p>
 <pre><code class="language-ignore">Input x, y:
     If y is Undefined
@@ -270,12 +270,12 @@ console.log('a' * 'b');
     Return x * y
 </code></pre>
 <p>The nice thing about this is you could define multiple API specifications and then stitch them all together. An API, for example, can be the bridge between two software developers. Bob is writing some code for a Math library and needs a function for multiplication. Jim has some free time and can write the multiplication code. Bob and Jim agree on an API, such that as long as Jim's code meets the API definition, we can combine the two pieces of code together when they have both finished. Modularization.</p>
-<p>Our list of bulletpoints totally works, but code is much more succint, and can be Type checked. In TypeScript, Bob can define the interface as a function. Same as our bulletpoints, the function takes a number and a second optional number. It then returns a number. He can then continue on his day writing other code that would call this function:</p>
+<p>Our list of bullet-points totally works, but code is much more succinct, and can be Type checked. In Typescript, Bob can define the interface as a function. Same as our bullet-points, the function takes a number and a second optional number. It then returns a number. He can then continue on his day writing other code that would call this function:</p>
 <pre><code class="language-ts">interface IMath {
     multiply: (x:Number, y?:Number) =&gt; Number
 }
 </code></pre>
-<p>Jim would then write the implementation. Same as the bulletpoint logic; If the type of the first input isn't a number, return an error. If the type of the second input isn't defined, we set it to <code>1</code>. If the second input was defined, but it's not a number, return an error. Otherwise if all is good, return the multiplication of the two inputs:</p>
+<p>Jim would then write the implementation. Same as the bullet-point logic; If the type of the first input isn't a number, return an error. If the type of the second input isn't defined, we set it to <code>1</code>. If the second input was defined, but it's not a number, return an error. Otherwise if all is good, return the multiplication of the two inputs:</p>
 <pre><code class="language-ts">var math:IMath = {
     multiply: (x:Number, y?:Number) =&gt; {
         if(typeof x !== 'number') throw new Error()
@@ -289,7 +289,7 @@ console.log('a' * 'b');
 <pre><code class="language-ts">console.log(math.multiply(2))   // 2
 console.log(math.multiply(2,3)) // 6
 </code></pre>
-<p>Voilà, we are interface masters. just created a simple interface and the implementation of that interface... Remember that API stands for Application Programming <strong>Interface</strong>? This basically means that a whole <em>Application</em> has an <em>Interface</em>.</p>
+<p>Voila, we are interface masters. just created a simple interface and the implementation of that interface... Remember that API stands for Application Programming <strong>Interface</strong>? This basically means that a whole <em>Application</em> has an <em>Interface</em>.</p>
 <p>So a better example of an <em>API</em> versus <em>just the I</em> might look more like this:</p>
 <pre><code class="language-ts">interface IMath {
     add: (x:Number, y?:Number) =&gt; Number
@@ -300,7 +300,7 @@ console.log(math.multiply(2,3)) // 6
 </code></pre>
 <h3><a class="header" href="#rest" id="rest">REST</a></h3>
 <p>REST stands for &quot;<strong>RE</strong>presentational <strong>S</strong>tate <strong>T</strong>ransfer&quot; and a RESTful Web service is required to provide an application access to its Web resources in a textual representation. - Wikipedia</p>
-<p>This interpretation doesn't win awards for being clear. A RESTful API <em>could be many things,</em> but the community has largely accepted that sending Http Requests and Responses in a certain manner constitutes as RESTful. A RESTful API is the bridge between the &quot;Frontend&quot; and &quot;Backend&quot; code that is needed to build a web application. They communicate via the API. Backend code is usually the server that connects to a database and performs business logic on said data before sending it to a Frontend. The Frontend is usually an application that runs in the browser that makes the business logic and data make sense to users. The Frontend also handles user input and interactions. Why split the two? Again, for modularization. The two areas have become complex enough that they require more expertise. Thus web applications are largely split.</p>
+<p>This interpretation doesn't win awards for being clear. A RESTful API <em>could be many things,</em> but the community has largely accepted that sending Http Requests and Responses in a certain manner constitutes as RESTful. A RESTful API is the bridge between the &quot;Frontend&quot; and &quot;Backend&quot; code that is needed to build a web application. They communicate via the API. Backend code is usually the server that connects to a database and performs business logic on said data before sending it to a Frontend. The Frontend is usually an application that runs in the browser that makes the business logic and data make sense to users. The Frontend also handles user input and interactions. Why split the two? Again, for Modularization. The two areas have become complex enough that they require more expertise. Thus web applications are largely split.</p>
 <p>For us to build a RESTful API we need to focus on three attributes of an Http Request:</p>
 <ul>
 <li>Method</li>
@@ -362,7 +362,7 @@ console.log(math.multiply(2,3)) // 6
     Method: &quot;DELETE&quot;
 }
 </code></pre>
-<p>With the above RESTful API defined, the frontend developers can build an application that queries for users. Similarly, the backend developers can build their code to serve up users and ways to modify users. Once both sides have completed their code, the whole system works together.</p>
+<p>With the above RESTful API defined, the Frontend developers can build an application that queries for users. Similarly, the backend developers can build their code to serve up users and ways to modify users. Once both sides have completed their code, the whole system works together.</p>
 <h1><a class="header" href="#setup-api-server" id="setup-api-server">Setup API Server</a></h1>
 <p>For our Map project, we need a robust and easy to use API Server. Luckily <a href="https://expressjs.com/">Express.js</a> fits these requirements and has a nice DSL to work with. <em>&quot;Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.&quot;</em></p>
 <blockquote>
@@ -556,7 +556,7 @@ Snapshots:   0 total
 Time:        0.645 s, estimated 1 s
 Ran all test suites.
 </code></pre>
-<p>Onwards, to creating Docker files.</p>
+<p>Onward, to creating Docker files.</p>
 <h1><a class="header" href="#docker-files" id="docker-files">Docker Files</a></h1>
 <p>Edit the <code>Dockerfile</code>: </p>
 <pre><code class="language-Dockerfile">FROM node:lts-alpine
@@ -623,7 +623,7 @@ docker-compose start mongo
 <p>Note that this doesn't remove/delete the container, just stops it from running.</p>
 <p>We aren't going to use Postgres, so you can stop all containers (<code>docker-compose down</code>) and remove the <code>postgres:</code> section from the <code>docker-compose.yml</code> file.</p>
 <blockquote>
-<p>Removing ununsed Docker objects...</p>
+<p>Removing unused Docker objects...</p>
 </blockquote>
 <p>Sometimes after lots of development, you'll get &quot;Out of space&quot; warnings. Usually related to dangling volumes/images/etc. These are resources that we can remove, but then we will lose any saved data. I recommend removing these every now and then:</p>
 <pre><code class="language-bash">docker system prune
@@ -666,7 +666,7 @@ git branch -M main
 <h1><a class="header" href="#design-and-build-api" id="design-and-build-api">Design and Build API</a></h1>
 <p>One of the biggest problems with software today is that people do not spend enough time in the &quot;design&quot; phase. It has become easier to iterate and change code, but if we spend some extra time in the beginning to think through our system, we will mitigate a lot of potential changes.</p>
 <p>Why Mongo?</p>
-<p>Mongo is a NoSQL database, which mostly means it is more freeform and offers us some flexibility in the prototyping phase. It also has a nice way to query and aggregate with GPS coordinates. Mongo documents are essentially JSON documents, so Mongo works well with JavaScript based applications. </p>
+<p>Mongo is a NoSQL database, which mostly means it is more free-form and offers us some flexibility in the prototyping phase. It also has a nice way to query and aggregate with GPS coordinates. Mongo documents are essentially JSON documents, so Mongo works well with JavaScript based applications. </p>
 <p>So right now our system might be something like this:</p>
 <p><img src="chapter_2/../assets/app_design.png" alt="System One" /></p>
 <p>We can then think of what we want our API endpoints to look like. For retrieving Users, perhaps something like:</p>
@@ -800,7 +800,7 @@ Connected to database
 </li>
 </ul>
 <h2><a class="header" href="#schemas--models" id="schemas--models">Schemas &amp; Models</a></h2>
-<p>We will build the Earthquake schema first, following the guide from <a href="https://mongoosejs.com/docs/geojson.html">Mongoose geoJSON docs</a>. Create a file called <code>models.js</code>:</p>
+<p>We will build the Earthquake schema first, following the guide from <a href="https://mongoosejs.com/docs/geojson.html">Mongoose geo-JSON docs</a>. Create a file called <code>models.js</code>:</p>
 <pre><code class="language-js">const mongoose = require('mongoose');
 const { Schema } = mongoose;
 

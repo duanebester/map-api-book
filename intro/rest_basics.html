@@ -178,7 +178,7 @@
 <li>You give me any two numbers, and I'll give you their product.</li>
 </ul>
 <p>That's all it takes! The above is a totally legit API. Just a list of bullet points.</p>
-<p>An API is just a way to define a set of rules. It was invented to allow software developers to modularize their code. You could take the above API defintion, hand it to any software developer, and they can write the code that adheres to the rules.</p>
+<p>An API is just a way to define a set of rules. It was invented to allow software developers to modularize their code. You could take the above API definition, hand it to any software developer, and they can write the code that adheres to the rules.</p>
 <p>E.g.</p>
 <pre><code class="language-ignore">Input x, y:
     If y is Undefined
@@ -216,12 +216,12 @@ console.log('a' * 'b');
     Return x * y
 </code></pre>
 <p>The nice thing about this is you could define multiple API specifications and then stitch them all together. An API, for example, can be the bridge between two software developers. Bob is writing some code for a Math library and needs a function for multiplication. Jim has some free time and can write the multiplication code. Bob and Jim agree on an API, such that as long as Jim's code meets the API definition, we can combine the two pieces of code together when they have both finished. Modularization.</p>
-<p>Our list of bulletpoints totally works, but code is much more succint, and can be Type checked. In TypeScript, Bob can define the interface as a function. Same as our bulletpoints, the function takes a number and a second optional number. It then returns a number. He can then continue on his day writing other code that would call this function:</p>
+<p>Our list of bullet-points totally works, but code is much more succinct, and can be Type checked. In Typescript, Bob can define the interface as a function. Same as our bullet-points, the function takes a number and a second optional number. It then returns a number. He can then continue on his day writing other code that would call this function:</p>
 <pre><code class="language-ts">interface IMath {
     multiply: (x:Number, y?:Number) =&gt; Number
 }
 </code></pre>
-<p>Jim would then write the implementation. Same as the bulletpoint logic; If the type of the first input isn't a number, return an error. If the type of the second input isn't defined, we set it to <code>1</code>. If the second input was defined, but it's not a number, return an error. Otherwise if all is good, return the multiplication of the two inputs:</p>
+<p>Jim would then write the implementation. Same as the bullet-point logic; If the type of the first input isn't a number, return an error. If the type of the second input isn't defined, we set it to <code>1</code>. If the second input was defined, but it's not a number, return an error. Otherwise if all is good, return the multiplication of the two inputs:</p>
 <pre><code class="language-ts">var math:IMath = {
     multiply: (x:Number, y?:Number) =&gt; {
         if(typeof x !== 'number') throw new Error()
@@ -235,7 +235,7 @@ console.log('a' * 'b');
 <pre><code class="language-ts">console.log(math.multiply(2))   // 2
 console.log(math.multiply(2,3)) // 6
 </code></pre>
-<p>Voilà, we are interface masters. just created a simple interface and the implementation of that interface... Remember that API stands for Application Programming <strong>Interface</strong>? This basically means that a whole <em>Application</em> has an <em>Interface</em>.</p>
+<p>Voila, we are interface masters. just created a simple interface and the implementation of that interface... Remember that API stands for Application Programming <strong>Interface</strong>? This basically means that a whole <em>Application</em> has an <em>Interface</em>.</p>
 <p>So a better example of an <em>API</em> versus <em>just the I</em> might look more like this:</p>
 <pre><code class="language-ts">interface IMath {
     add: (x:Number, y?:Number) =&gt; Number
@@ -246,7 +246,7 @@ console.log(math.multiply(2,3)) // 6
 </code></pre>
 <h3><a class="header" href="#rest" id="rest">REST</a></h3>
 <p>REST stands for &quot;<strong>RE</strong>presentational <strong>S</strong>tate <strong>T</strong>ransfer&quot; and a RESTful Web service is required to provide an application access to its Web resources in a textual representation. - Wikipedia</p>
-<p>This interpretation doesn't win awards for being clear. A RESTful API <em>could be many things,</em> but the community has largely accepted that sending Http Requests and Responses in a certain manner constitutes as RESTful. A RESTful API is the bridge between the &quot;Frontend&quot; and &quot;Backend&quot; code that is needed to build a web application. They communicate via the API. Backend code is usually the server that connects to a database and performs business logic on said data before sending it to a Frontend. The Frontend is usually an application that runs in the browser that makes the business logic and data make sense to users. The Frontend also handles user input and interactions. Why split the two? Again, for modularization. The two areas have become complex enough that they require more expertise. Thus web applications are largely split.</p>
+<p>This interpretation doesn't win awards for being clear. A RESTful API <em>could be many things,</em> but the community has largely accepted that sending Http Requests and Responses in a certain manner constitutes as RESTful. A RESTful API is the bridge between the &quot;Frontend&quot; and &quot;Backend&quot; code that is needed to build a web application. They communicate via the API. Backend code is usually the server that connects to a database and performs business logic on said data before sending it to a Frontend. The Frontend is usually an application that runs in the browser that makes the business logic and data make sense to users. The Frontend also handles user input and interactions. Why split the two? Again, for Modularization. The two areas have become complex enough that they require more expertise. Thus web applications are largely split.</p>
 <p>For us to build a RESTful API we need to focus on three attributes of an Http Request:</p>
 <ul>
 <li>Method</li>
@@ -308,7 +308,7 @@ console.log(math.multiply(2,3)) // 6
     Method: &quot;DELETE&quot;
 }
 </code></pre>
-<p>With the above RESTful API defined, the frontend developers can build an application that queries for users. Similarly, the backend developers can build their code to serve up users and ways to modify users. Once both sides have completed their code, the whole system works together.</p>
+<p>With the above RESTful API defined, the Frontend developers can build an application that queries for users. Similarly, the backend developers can build their code to serve up users and ways to modify users. Once both sides have completed their code, the whole system works together.</p>
 
                     </main>
 

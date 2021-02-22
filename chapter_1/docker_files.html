@@ -233,7 +233,7 @@ docker-compose start mongo
 <p>Note that this doesn't remove/delete the container, just stops it from running.</p>
 <p>We aren't going to use Postgres, so you can stop all containers (<code>docker-compose down</code>) and remove the <code>postgres:</code> section from the <code>docker-compose.yml</code> file.</p>
 <blockquote>
-<p>Removing ununsed Docker objects...</p>
+<p>Removing unused Docker objects...</p>
 </blockquote>
 <p>Sometimes after lots of development, you'll get &quot;Out of space&quot; warnings. Usually related to dangling volumes/images/etc. These are resources that we can remove, but then we will lose any saved data. I recommend removing these every now and then:</p>
 <pre><code class="language-bash">docker system prune
