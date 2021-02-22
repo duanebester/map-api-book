@@ -21,8 +21,11 @@ jobs:
     - name: Test mdBook
       run: mdbook test
 
+    - name: Update
+      run: sudo apt update
+    
     - name: Install aspell
-      run: sudo apt update && sudo install aspell -y
+      run: sudo install aspell -y
       
     - name: Run spellchecker
       run: ./ci/spellcheck.sh list
