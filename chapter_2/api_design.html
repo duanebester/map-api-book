@@ -173,16 +173,22 @@
 <p>Mongo is a NoSQL database, which mostly means it is more free-form and offers us some flexibility in the prototyping phase. It also has a nice way to query and aggregate with GPS coordinates. Mongo documents are essentially JSON documents, so Mongo works well with JavaScript based applications. </p>
 <p>So right now our system might be something like this:</p>
 <p><img src="../assets/app_design.png" alt="System One" /></p>
-<p>We can then think of what we want our API endpoints to look like. For retrieving Users, perhaps something like:</p>
+<p>We can then think of what we want our API endpoints to look like. For retrieving Earthquakes, perhaps something like:</p>
 <table><thead><tr><th>Operation</th><th>Request Method</th><th>Request Path</th><th>Response Status</th><th>Response Body</th></tr></thead><tbody>
-<tr><td>Get Users</td><td>GET</td><td><code>/api/&lt;version&gt;/users</code></td><td>200</td><td>[User]</td></tr>
+<tr><td>Get Quakes</td><td>GET</td><td><code>/api/&lt;version&gt;/earthquakes</code></td><td>200</td><td>[Earthquake]</td></tr>
 </tbody></table>
-<p>And if we wanted to just retrieve a User by the user's ID, we can add an <code>/:id</code> to the Path of the above to make a new endpoint:</p>
-<table><thead><tr><th>Operation</th><th>Request Method</th><th>Request Path</th><th>Response Status</th><th>Response Body</th></tr></thead><tbody>
-<tr><td>Get User By ID</td><td>GET</td><td><code>/api/&lt;version&gt;/users/:id</code></td><td>200</td><td>User</td></tr>
-</tbody></table>
+<p>And if we wanted to limit the amount of earthquakes returned, we can add a <code>limit</code> query param to the path of the above:</p>
+<pre><code class="language-ignore">/api/&lt;version&gt;/earthquakes?limit=10
+</code></pre>
+<p>And to paginate through our earthquakes, a <code>skip</code> query param:</p>
+<pre><code class="language-ignore">/api/&lt;version&gt;/earthquakes?limit=10&amp;skip=10
+</code></pre>
+<p>To find earthquakes near a certain coordinate, we could setup a long,lat query param called <code>near</code>:</p>
+<pre><code class="language-ignore">/api/&lt;version&gt;/earthquakes?near=[longitude,latitude]
+</code></pre>
+<p>We could also pass min and max distances (from above GPS point) as query params, but for now we will just let the API default those to something reasonable.</p>
 <blockquote>
-<p>It's usually best practice to version API's. We can then support multiple versions of the Get Users endpoint.</p>
+<p>It's usually best practice to version API's. We can then support multiple versions of the Get Earthquakes endpoint.</p>
 </blockquote>
 <p>For &quot;CRUD&quot; (Creating, Retrieving, Updating and Deleting) Users, a flushed out API might look like this:</p>
 <blockquote>
