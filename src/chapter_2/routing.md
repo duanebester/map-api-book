@@ -1,25 +1,38 @@
 # Routing
 
-From our design section, our User routes will look like so:
+### Earthquakes
 
-| Operation      | Request Method | Request Body | Request Path      | Response Status | Response Body |
-|----------------|----------------|--------------|-------------------|-----------------|---------------|
-| Get Users      | GET            |              | /api/v1/users     | 200             | [User]        |
-| Get User By ID | GET            |              | /api/v1/users/:id | 200             | User          |
-| Create User    | POST           | User         | /api/v1/users     | 201             | User          |
-| Update User    | PUT            | User         | /api/v1/users/:id | 200             | User          |
-| Delete User    | DELETE         |              | /api/v1/users/:id | 204             |               |
+From our design section, our Earthquake route will look like:
 
-Which we can represent using Express' DSL.
+| Operation       | Request Method | Request Path                 | Response Status | Response Body |
+|-----------------|----------------|------------------------------|-----------------|---------------|
+| Get Earthquakes | GET            | `/api/<version>/earthquakes` | 200             | [Earthquake]  |
 
-But first, let's import our User model into `app.js`:
+Which we can represent using Express' DSL...
+Let's import our models into `app.js` and tell express to use JSON:
 ```js
 const express = require('express');
-const { User } = require('./models');
+// Add models
+const { User, Earthquake } = require('./models');
 const app = express();
+// Use JSON
+app.use(express.json());
 ```
 
-Now we can add our routes for Users:
+Now we can craft our earthquakes endpoint like so:
+```js
+app.get('/earthquakes', async (req, res) => {
+  const limit = parseInt(req.query.limit) || 10;
+  const skip = parseInt(req.query.skip) || 0;
+  const find = {}
+  const earthquakes = await Earthquake.find(find).limit(limit).skip(skip);
+  res.status(200).send(earthquakes);
+});
+```
+
+### Users
+
+We can define our routes for Users:
 ```js
 app.get('/users', (req, res) => {
   const users = await User.find({});
