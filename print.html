@@ -862,21 +862,31 @@ const User = mongoose.model('User', userSchema);
 <pre><code class="language-js">module.exports = { User, Earthquake };
 </code></pre>
 <h1><a class="header" href="#routing" id="routing">Routing</a></h1>
-<p>From our design section, our User routes will look like so:</p>
-<table><thead><tr><th>Operation</th><th>Request Method</th><th>Request Body</th><th>Request Path</th><th>Response Status</th><th>Response Body</th></tr></thead><tbody>
-<tr><td>Get Users</td><td>GET</td><td></td><td>/api/v1/users</td><td>200</td><td>[User]</td></tr>
-<tr><td>Get User By ID</td><td>GET</td><td></td><td>/api/v1/users/:id</td><td>200</td><td>User</td></tr>
-<tr><td>Create User</td><td>POST</td><td>User</td><td>/api/v1/users</td><td>201</td><td>User</td></tr>
-<tr><td>Update User</td><td>PUT</td><td>User</td><td>/api/v1/users/:id</td><td>200</td><td>User</td></tr>
-<tr><td>Delete User</td><td>DELETE</td><td></td><td>/api/v1/users/:id</td><td>204</td><td></td></tr>
+<h3><a class="header" href="#earthquakes" id="earthquakes">Earthquakes</a></h3>
+<p>From our design section, our Earthquake route will look like:</p>
+<table><thead><tr><th>Operation</th><th>Request Method</th><th>Request Path</th><th>Response Status</th><th>Response Body</th></tr></thead><tbody>
+<tr><td>Get Earthquakes</td><td>GET</td><td><code>/api/&lt;version&gt;/earthquakes</code></td><td>200</td><td>[Earthquake]</td></tr>
 </tbody></table>
-<p>Which we can represent using Express' DSL.</p>
-<p>But first, let's import our User model into <code>app.js</code>:</p>
+<p>Which we can represent using Express' DSL...
+Let's import our models into <code>app.js</code> and tell express to use JSON:</p>
 <pre><code class="language-js">const express = require('express');
-const { User } = require('./models');
+// Add models
+const { User, Earthquake } = require('./models');
 const app = express();
+// Use JSON
+app.use(express.json());
 </code></pre>
-<p>Now we can add our routes for Users:</p>
+<p>Now we can craft our earthquakes endpoint like so:</p>
+<pre><code class="language-js">app.get('/earthquakes', async (req, res) =&gt; {
+  const limit = parseInt(req.query.limit) || 10;
+  const skip = parseInt(req.query.skip) || 0;
+  const find = {}
+  const earthquakes = await Earthquake.find(find).limit(limit).skip(skip);
+  res.status(200).send(earthquakes);
+});
+</code></pre>
+<h3><a class="header" href="#users" id="users">Users</a></h3>
+<p>We can define our routes for Users:</p>
 <pre><code class="language-js">app.get('/users', (req, res) =&gt; {
   const users = await User.find({});
   res.status(200).send(users)
