@@ -25,4 +25,4 @@ jobs:
       run: sudo apt install aspell -y
       
     - name: Run spellchecker
-      run: ./ci/spellchecker.sh
+      run: ./ci/spellcheck.sh
