@@ -17,7 +17,7 @@ That's all it takes! The above is a totally legit API. Just a list of bullet poi
 An API is just a way to define a set of rules. It was invented to allow software developers to modularize their code. You could take the above API definition, hand it to any software developer, and they can write the code that adheres to the rules.
 
 E.g.
-```ignore
+```bash,ignore
 Input x, y:
     If y is Undefined
         Set y = 1
@@ -41,7 +41,7 @@ Our API (version 2.0):
 * Can only enter numbers, entering anything else returns an error message.
 
 E.g.
-```ignore
+```bash,ignore
 Input x, y:
     If x is Undefined
         Return Error

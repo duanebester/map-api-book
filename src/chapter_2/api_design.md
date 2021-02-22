@@ -18,17 +18,17 @@ We can then think of what we want our API endpoints to look like. For retrieving
 
 
 And if we wanted to limit the amount of earthquakes returned, we can add a `limit` query param to the path of the above:
-```ignore
+```bash,ignore
 /api/<version>/earthquakes?limit=10
 ```
 
 And to paginate through our earthquakes, a `skip` query param:
-```ignore
+```bash,ignore
 /api/<version>/earthquakes?limit=10&skip=10
 ```
 
 To find earthquakes near a certain coordinate, we could setup a long,lat query param called `near`:
-```ignore
+```bash,ignore
 /api/<version>/earthquakes?near=[longitude,latitude]
 ```
 

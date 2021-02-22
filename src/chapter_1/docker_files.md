@@ -14,7 +14,7 @@ CMD [ "node", "index.js" ]
 ```
 
 Edit the `.dockerignore` file: 
-```ignore
+```bash,ignore
 .git
 node_modules/
 ```

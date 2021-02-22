@@ -21,7 +21,7 @@ touch .gitignore
 Any files or folders we list in the `.gitignore` will be ignored by Git and won't be pushed to our remote repository.
 
 Edit `.gitignore` and add `node_modules/`, and `mongo-volume/`:
-```ignore
+```bash,ignore
 node_modules/
 mongo-volume/
 ```
