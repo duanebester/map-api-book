@@ -10,19 +10,31 @@ So right now our system might be something like this:
 
 ![System One](../assets/app_design.png)
 
-We can then think of what we want our API endpoints to look like. For retrieving Users, perhaps something like:
+We can then think of what we want our API endpoints to look like. For retrieving Earthquakes, perhaps something like:
 
-| Operation | Request Method | Request Path           | Response Status | Response Body |
-|-----------|----------------|------------------------|-----------------|---------------|
-| Get Users | GET            | `/api/<version>/users` | 200             | [User]        |
+| Operation  | Request Method | Request Path                 | Response Status | Response Body |
+|------------|----------------|------------------------------|-----------------|---------------|
+| Get Quakes | GET            | `/api/<version>/earthquakes` | 200             | [Earthquake]  |
 
-And if we wanted to just retrieve a User by the user's ID, we can add an `/:id` to the Path of the above to make a new endpoint:
 
-| Operation      | Request Method | Request Path               | Response Status | Response Body |
-|----------------|----------------|----------------------------|-----------------|---------------|
-| Get User By ID | GET            | `/api/<version>/users/:id` | 200             | User          |
+And if we wanted to limit the amount of earthquakes returned, we can add a `limit` query param to the path of the above:
+```ignore
+/api/<version>/earthquakes?limit=10
+```
 
-> It's usually best practice to version API's. We can then support multiple versions of the Get Users endpoint.
+And to paginate through our earthquakes, a `skip` query param:
+```ignore
+/api/<version>/earthquakes?limit=10&skip=10
+```
+
+To find earthquakes near a certain coordinate, we could setup a long,lat query param called `near`:
+```ignore
+/api/<version>/earthquakes?near=[longitude,latitude]
+```
+
+We could also pass min and max distances (from above GPS point) as query params, but for now we will just let the API default those to something reasonable.
+
+> It's usually best practice to version API's. We can then support multiple versions of the Get Earthquakes endpoint.
 
 For "CRUD" (Creating, Retrieving, Updating and Deleting) Users, a flushed out API might look like this:
 
