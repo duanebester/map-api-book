@@ -48,7 +48,7 @@ The list goes on and on... For now, let's start simple:
 
 ## Schemas & Models
 
-We will build the Earthquake schema first, following the guide from [Mongoose geoJSON docs](https://mongoosejs.com/docs/geojson.html). Create a file called `models.js`:
+We will build the Earthquake schema first, following the guide from [Mongoose geo-JSON docs](https://mongoosejs.com/docs/geojson.html). Create a file called `models.js`:
 ```js
 const mongoose = require('mongoose');
 const { Schema } = mongoose;

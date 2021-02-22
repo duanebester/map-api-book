@@ -17,7 +17,7 @@ This book will cover getting up and running with the basics of a full-stack appl
     * React Testing Library
 * Node.js
     * Express API Framework
-        * Middleware
+        * Middle-ware
     * Testing
     * User Authentication
 * MongoDB

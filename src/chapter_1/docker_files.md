@@ -88,7 +88,7 @@ Note that this doesn't remove/delete the container, just stops it from running.
 
 We aren't going to use Postgres, so you can stop all containers (`docker-compose down`) and remove the `postgres:` section from the `docker-compose.yml` file.
 
-> Removing ununsed Docker objects...
+> Removing unused Docker objects...
 
 Sometimes after lots of development, you'll get "Out of space" warnings. Usually related to dangling volumes/images/etc. These are resources that we can remove, but then we will lose any saved data. I recommend removing these every now and then:
 ```bash

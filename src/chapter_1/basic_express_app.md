@@ -110,4 +110,4 @@ Time:        0.645 s, estimated 1 s
 Ran all test suites.
 ```
 
-Onwards, to creating Docker files.
+Onward, to creating Docker files.
