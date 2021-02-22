@@ -43,7 +43,7 @@ It will take a while, but your Mongo instance should come up. We can verify by r
 > docker ps
 # Returns:
 # CONTAINER ID   IMAGE                   
-# 6bba9117fccc   mongo-earthquakes:latest
+# ............   mongo-earthquakes:latest
 ```
 
 To stop the running containers, run:
