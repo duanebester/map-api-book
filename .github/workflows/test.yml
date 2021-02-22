@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
     - name: Checkout Repo
       uses: actions/checkout@v2
@@ -25,7 +25,7 @@ jobs:
       run: sudo apt update
     
     - name: Install aspell
-      run: sudo install aspell -y
+      run: sudo apt install aspell -y
       
     - name: Run spellchecker
       run: ./ci/spellcheck.sh list
