@@ -234,7 +234,7 @@
 <p>That's all it takes! The above is a totally legit API. Just a list of bullet points.</p>
 <p>An API is just a way to define a set of rules. It was invented to allow software developers to modularize their code. You could take the above API definition, hand it to any software developer, and they can write the code that adheres to the rules.</p>
 <p>E.g.</p>
-<pre><code class="language-ignore">Input x, y:
+<pre><code class="language-bash ignore">Input x, y:
     If y is Undefined
         Set y = 1
 
@@ -254,7 +254,7 @@ console.log('a' * 'b');
 <li>Can only enter numbers, entering anything else returns an error message.</li>
 </ul>
 <p>E.g.</p>
-<pre><code class="language-ignore">Input x, y:
+<pre><code class="language-bash ignore">Input x, y:
     If x is Undefined
         Return Error
 
@@ -570,7 +570,7 @@ EXPOSE 8080
 CMD [ &quot;node&quot;, &quot;index.js&quot; ]
 </code></pre>
 <p>Edit the <code>.dockerignore</code> file: </p>
-<pre><code class="language-ignore">.git
+<pre><code class="language-bash ignore">.git
 node_modules/
 </code></pre>
 <p>We are going to use a Mongo instance (v4.4) that has some Earthquake data pre-loaded.
@@ -647,7 +647,7 @@ docker-compose start mongo
 </code></pre>
 <p>Any files or folders we list in the <code>.gitignore</code> will be ignored by Git and won't be pushed to our remote repository.</p>
 <p>Edit <code>.gitignore</code> and add <code>node_modules/</code>, and <code>mongo-volume/</code>:</p>
-<pre><code class="language-ignore">node_modules/
+<pre><code class="language-bash ignore">node_modules/
 mongo-volume/
 </code></pre>
 <p>Then enter;</p>
@@ -674,13 +674,13 @@ git branch -M main
 <tr><td>Get Quakes</td><td>GET</td><td><code>/api/&lt;version&gt;/earthquakes</code></td><td>200</td><td>[Earthquake]</td></tr>
 </tbody></table>
 <p>And if we wanted to limit the amount of earthquakes returned, we can add a <code>limit</code> query param to the path of the above:</p>
-<pre><code class="language-ignore">/api/&lt;version&gt;/earthquakes?limit=10
+<pre><code class="language-bash ignore">/api/&lt;version&gt;/earthquakes?limit=10
 </code></pre>
 <p>And to paginate through our earthquakes, a <code>skip</code> query param:</p>
-<pre><code class="language-ignore">/api/&lt;version&gt;/earthquakes?limit=10&amp;skip=10
+<pre><code class="language-bash ignore">/api/&lt;version&gt;/earthquakes?limit=10&amp;skip=10
 </code></pre>
 <p>To find earthquakes near a certain coordinate, we could setup a long,lat query param called <code>near</code>:</p>
-<pre><code class="language-ignore">/api/&lt;version&gt;/earthquakes?near=[longitude,latitude]
+<pre><code class="language-bash ignore">/api/&lt;version&gt;/earthquakes?near=[longitude,latitude]
 </code></pre>
 <p>We could also pass min and max distances (from above GPS point) as query params, but for now we will just let the API default those to something reasonable.</p>
 <blockquote>

@@ -178,13 +178,13 @@
 <tr><td>Get Quakes</td><td>GET</td><td><code>/api/&lt;version&gt;/earthquakes</code></td><td>200</td><td>[Earthquake]</td></tr>
 </tbody></table>
 <p>And if we wanted to limit the amount of earthquakes returned, we can add a <code>limit</code> query param to the path of the above:</p>
-<pre><code class="language-ignore">/api/&lt;version&gt;/earthquakes?limit=10
+<pre><code class="language-bash ignore">/api/&lt;version&gt;/earthquakes?limit=10
 </code></pre>
 <p>And to paginate through our earthquakes, a <code>skip</code> query param:</p>
-<pre><code class="language-ignore">/api/&lt;version&gt;/earthquakes?limit=10&amp;skip=10
+<pre><code class="language-bash ignore">/api/&lt;version&gt;/earthquakes?limit=10&amp;skip=10
 </code></pre>
 <p>To find earthquakes near a certain coordinate, we could setup a long,lat query param called <code>near</code>:</p>
-<pre><code class="language-ignore">/api/&lt;version&gt;/earthquakes?near=[longitude,latitude]
+<pre><code class="language-bash ignore">/api/&lt;version&gt;/earthquakes?near=[longitude,latitude]
 </code></pre>
 <p>We could also pass min and max distances (from above GPS point) as query params, but for now we will just let the API default those to something reasonable.</p>
 <blockquote>
